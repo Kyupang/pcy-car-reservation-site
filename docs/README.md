@@ -39,8 +39,9 @@
 
 
 ## 사이트 추상도
-![2024-08-28 19 56 46](https://github.com/user-attachments/assets/a2c54b3f-bef9-49ac-ac8c-6f30e701a878)
-![2024-08-28 19 56 35](https://github.com/user-attachments/assets/a3ffc4ca-9d54-450d-98d9-595706f226e4)
-![2024-08-28 19 56 25](https://github.com/user-attachments/assets/53f0962e-54b4-4d19-9a2a-26c97c4590d8)
+
 ![2024-08-28 19 56 19](https://github.com/user-attachments/assets/7199a6bd-9aa2-4c4a-8667-24d848364a72)
+![2024-08-28 19 56 25](https://github.com/user-attachments/assets/53f0962e-54b4-4d19-9a2a-26c97c4590d8)
+![2024-08-28 19 56 35](https://github.com/user-attachments/assets/a3ffc4ca-9d54-450d-98d9-595706f226e4)
+![2024-08-28 19 56 46](https://github.com/user-attachments/assets/a2c54b3f-bef9-49ac-ac8c-6f30e701a878)
 
