@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Reservation</title>
+    <link rel="stylesheet" href="../styles.css">
+    <title>createForm</title>
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet"/>
+    <style>
+        /* FullCalendar에서 예약 불가능한 날짜 스타일링 */
+        .fc-event-reserved {
+            background-color: red;
+            border-color: red;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <a href="/"><img src="../home-icon.png" alt="Home Icon"></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/reservation/calendar">캘린더</a></li>
+            <li><a href="/post/carImagePostList">촬영 게시판</a></li>
+            <li><a href="/post/wishPostList">건의 게시판</a></li>
+            <li><a href="/reservation/textList">예약 목록</a></li>
+            <li><a href="/managerLogin">관리자 페이지</a></li>
+        </ul>
+    </nav>
+    <div class="profile">
+        <!--        <a href="#"><img src="profile-icon.png" alt="Profile Icon"></a>-->
+    </div>
+</header>
+<form id="reservationForm" role="form">
+    <input type="hidden" name="carId" id="carId" th:value="${carId}"/>
+
+    <div class="form-group">
+        <label for="name">이름</label>
+        <input type="text" name="name" id="name" class="form-control" placeholder="이름을 입력하세요"/>
+    </div>
+
+    <div class="form-group">
+        <label for="phoneNumber">번호</label>
+        <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" placeholder="번호를 입력하세요"/>
+    </div>
+
+    <div class="form-group">
+        <label for="affiliation">소속</label>
+        <input type="text" name="affiliation" id="affiliation" class="form-control" placeholder="소속을 입력하세요"/>
+    </div>
+
+    <div id="calendar"></div> <!-- FullCalendar를 표시할 DIV -->
+
+    <div class="form-group">
+        <label for="startTime">예약 시작 시간</label>
+        <input type="datetime-local" id="startTime" name="startTime" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+        <label for="endTime">예약 끝나는 시간</label>
+        <input type="datetime-local" id="endTime" name="endTime" class="form-control"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var carId = document.getElementById('carId').value;
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: `/reservation/getReservationListById?carId=${carId}`, // 차량 ID에 따른 예약 리스트를 가져옴
+        eventContent: function(arg) {
+            var startTime = formatTime(arg.event.start);
+            var endTime = arg.event.end ? formatTime(arg.event.end) : 'N/A';
+            var carName = arg.event.extendedProps.carName; // 차량 이름 가져오기
+
+            return {
+                html: `
+                    <div>
+                        <strong>${carName}</strong><br>
+                        <strong>Start:</strong> ${startTime}<br>
+                        <strong>End:</strong> ${endTime}
+                    </div>
+                `
+            };
+        },
+        eventClassNames: function(event) {
+            return event.reserved ? 'fc-event-reserved' : '';
+        },
+        selectable: true,
+        select: function(info) {
+            document.getElementById('startTime').value = info.startStr;
+            document.getElementById('endTime').value = info.endStr;
+        }
+    });
+    calendar.render();
+});
+
+// 시간을 AM/PM 형식으로 변환하는 함수
+function formatTime(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // 0 시는 12로 변환
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    return hours + ':' + minutes + ' ' + ampm;
+}
+
+$('#reservationForm').on('submit', function(event) {
+    event.preventDefault();
+
+    // 클라이언트 측 유효성 검사
+    var name = $('#name').val().trim();
+    var phoneNumber = $('#phoneNumber').val().trim();
+    var affiliation = $('#affiliation').val().trim();
+    var startTime = $('#startTime').val();
+    var endTime = $('#endTime').val();
+
+    if (!name) {
+        alert('이름을 입력하세요.');
+        $('#name').focus();
+        return;
+    }
+
+    if (!phoneNumber) {
+        alert('번호를 입력하세요.');
+        $('#phoneNumber').focus();
+        return;
+    }
+
+    if (!affiliation) {
+        alert('소속을 입력하세요.');
+        $('#affiliation').focus();
+        return;
+    }
+
+    if (!startTime) {
+        alert('예약 시작 시간을 선택하세요.');
+        $('#startTime').focus();
+        return;
+    }
+
+    if (!endTime) {
+        alert('예약 끝나는 시간을 선택하세요.');
+        $('#endTime').focus();
+        return;
+    }
+
+    // 모든 유효성 검사를 통과하면 서버로 데이터를 전송합니다.
+    var formData = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/reservation/new',
+        data: formData,
+        success: function(response) {
+            if (response.success) {
+                var carId = $('#carId').val();
+                var name = $('#name').val();
+                var phoneNumber = $('#phoneNumber').val();
+                var affiliation = $('#affiliation').val();
+                var startTime = $('#startTime').val();
+                var endTime = $('#endTime').val();
+
+                window.location.href = `/reservation/confirm?carId=${carId}&name=${name}&phoneNumber=${phoneNumber}&affiliation=${affiliation}&startTime=${startTime}&endTime=${endTime}`;
+            } else {
+                alert(response.errorMessage);
+            }
+        }
+    });
+});
+
+</script>
+</body>
+</html>

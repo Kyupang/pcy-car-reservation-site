@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글 상세 보기</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header>
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center p-3 bg-light shadow-sm">
+      <a href="/" class="logo">
+        <img src="../home-icon.png" alt="Home Icon" class="img-fluid" style="width: 40px;">
+      </a>
+      <nav>
+        <ul class="nav">
+          <li class="nav-item"><a class="nav-link" href="/reservation/calendar">캘린더</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/post/carImagePostList">촬영 게시판</a></li>
+          <li class="nav-item"><a class="nav-link" href="/post/wishPostList">건의 게시판</a></li>
+          <li class="nav-item"><a class="nav-link" href="/reservation/textList">예약 목록</a></li>
+          <li class="nav-item"><a class="nav-link" href="/managerLogin">관리자 페이지</a></li>
+        </ul>
+      </nav>
+      <div class="profile">
+        <!-- Profile icon could be added here -->
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container mt-4">
+  <h1 class="mb-4" th:text="${post.title}">게시글 제목</h1>
+
+  <div class="mb-3">
+    <h5>작성자:</h5>
+    <p th:text="${post.author}">작성자 이름</p>
+  </div>
+
+  <div class="mb-3">
+    <h5>내용:</h5>
+    <p th:text="${post.content}">게시글 내용</p>
+  </div>
+
+  <div class="mb-3">
+    <h5>이미지:</h5>
+    <div th:if="${post.imageUrls != null}">
+      <div th:each="imageUrl : ${post.imageUrls}">
+        <img th:src="@{${imageUrl}}" class="img-fluid mb-2" alt="Post Image" style="max-width: 100%;">
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <a href="/post/carImagePostList" class="btn btn-secondary">목록으로 돌아가기</a>
+  </div>
+</main>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>
