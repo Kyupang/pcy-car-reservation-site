@@ -32,3 +32,11 @@
 - [] 게시판 기능
     - [] 촬영 게시판 목록, 게시물 등록, 게시글 상세페이지, 사진 등록 기능
     - [] 건의 게시판 목록, 게시물 등록, 게시글 상세페이지, 사진 등록 기능
+ 
+
+## 예약 관련 DB 설계 
+![image](https://github.com/user-attachments/assets/08de5af4-3e26-4709-9358-319fe58d970d)
+
+
+## 사이트 추상도
+https://www.figma.com/proto/BQMTXqg1rfhbZwpI6nCF4o/%EC%B0%A8%EB%9F%89%EC%8B%9C%EC%8A%A4%ED%85%9C?node-id=0-1&t=q4GCHnDYzLTlkq0x-1
