@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Reservation</title>
+    <link rel="stylesheet" href="../styles.css">
+    <title>예약 확인</title>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <a href="/"><img src="../home-icon.png" alt="Home Icon"></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/reservation/calendar">캘린더</a></li>
+            <li><a href="/post/carImagePostList">촬영 게시판</a></li>
+            <li><a href="/post/wishPostList">건의 게시판</a></li>
+            <li><a href="/reservation/textList">예약 목록</a></li>
+            <li><a href="/managerLogin">관리자 페이지</a></li>
+        </ul>
+    </nav>
+    <div class="profile">
+        <!--        <a href="#"><img src="profile-icon.png" alt="Profile Icon"></a>-->
+    </div>
+</header>
+<h1>예약 확인</h1>
+
+<img id="uploadedImage" alt="Uploaded Image" style="max-width: 300px; margin-top: 20px;"/>
+
+<p>예약을 완료하시겠습니까?</p>
+
+<p><strong>이름:</strong> <span th:text="${reservationRequestDTO.name}"></span></p>
+<p><strong>번호:</strong> <span th:text="${reservationRequestDTO.phoneNumber}"></span></p>
+<p><strong>소속:</strong> <span th:text="${reservationRequestDTO.affiliation}"></span></p>
+<p><strong>예약 시작 시간:</strong> <span th:text="${reservationRequestDTO.startTime}"></span></p>
+<p><strong>예약 끝나는 시간:</strong> <span th:text="${reservationRequestDTO.endTime}"></span></p>
+
+<form method="post" action="/reservation/complete">
+    <input type="hidden" name="carId" th:value="${carId}"/>
+    <input type="hidden" name="name" th:value="${reservationRequestDTO.name}"/>
+    <input type="hidden" name="phoneNumber" th:value="${reservationRequestDTO.phoneNumber}"/>
+    <input type="hidden" name="affiliation" th:value="${reservationRequestDTO.affiliation}"/>
+    <input type="hidden" name="startTime" th:value="${reservationRequestDTO.startTime}"/>
+    <input type="hidden" name="endTime" th:value="${reservationRequestDTO.endTime}"/>
+
+    <button type="submit" class="btn btn-primary">확인</button>
+</form>
+
+<a href="/">취소</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const apiUrl = '/viewWarningImage';
+
+  fetch(apiUrl)
+    .then(response => response.text())
+    .then(imageUrl => {
+      if (imageUrl) {
+        const imgElement = document.getElementById('uploadedImage');
+        imgElement.src = imageUrl;
+      } else {
+        console.log('No image URL returned from server.');
+      }
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+});
+
+</script>
+</body>
+</html>

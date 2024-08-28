@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Reservation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<header>
+    <div class="logo">
+        <a href="/"><img src="home-icon.png" alt="Home Icon"></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/reservation/calendar">캘린더</a></li>
+            <li><a href="/post/carImagePostList">촬영 게시판</a></li>
+            <li><a href="/post/wishPostList">건의 게시판</a></li>
+            <li><a href="/reservation/textList">예약 목록</a></li>
+            <li><a href="/managerLogin">관리자 페이지</a></li>
+        </ul>
+    </nav>
+    <div class="profile">
+        <!--        <a href="#"><img src="profile-icon.png" alt="Profile Icon"></a>-->
+    </div>
+</header>
+<div class="car-image">
+    <img id="car-image" src="default-image.png" alt="차량 이미지">
+</div>
+<div class="car-selection">
+    <label for="car-select">차량 목록</label>
+    <select id="car-select">
+        <!-- 차량 목록이 여기에 동적으로 추가됩니다. -->
+    </select>
+</div>
+
+<div class = "button">
+    <button id="reserve-button">예약페이지로 이동</button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const carSelect = document.getElementById('car-select');
+    const carImage = document.getElementById('car-image');
+    const reserveButton = document.getElementById('reserve-button');
+
+    fetch('/car/getCarList')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(car => {
+                const option = document.createElement('option');
+                option.value = car.id;
+                option.textContent = car.name;
+                option.dataset.image = car.imageUrl; // 이미지 URL을 data 속성에 저장
+                carSelect.appendChild(option);
+            });
+
+            // 기본적으로 첫 번째 차량의 이미지를 표시
+            if (data.length > 0 && data[0].imageUrl) {
+                carImage.src = data[0].imageUrl;
+            }
+        });
+
+    carSelect.addEventListener('change', function() {
+        const selectedOption = carSelect.options[carSelect.selectedIndex];
+        const imageUrl = selectedOption.dataset.image;
+
+        console.log("Selected image URL:", imageUrl);
+
+        if (imageUrl) {
+            carImage.src = imageUrl;
+        } else {
+            carImage.src = 'default-image.png'; // 기본 이미지로 설정
+        }
+    });
+
+    // 예약 페이지로 이동 시 차량 ID를 URL 쿼리 파라미터로 추가
+    reserveButton.addEventListener('click', function() {
+        const selectedCarId = carSelect.value;
+        window.location.href = `/reservation/new?carId=${selectedCarId}`;
+    });
+});
+</script>
+</body>
+</html>

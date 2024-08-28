@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>건의 게시판</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header>
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center p-3 bg-light shadow-sm">
+      <a href="/" class="logo">
+        <img src="../home-icon.png" alt="Home Icon" class="img-fluid" style="width: 40px;">
+      </a>
+      <nav>
+        <ul class="nav">
+          <li class="nav-item"><a class="nav-link" href="/reservation/calendar">캘린더</a></li>
+          <li class="nav-item"><a class="nav-link" href="/post/carImagePostList">촬영 게시판</a></li>
+          <li class="nav-item"><a class="nav-link" href="/post/wishPostList">건의 게시판</a></li>
+          <li class="nav-item"><a class="nav-link" href="/reservation/textList">예약 목록</a></li>
+          <li class="nav-item"><a class="nav-link" href="/managerLogin">관리자 페이지</a></li>
+        </ul>
+      </nav>
+      <div class="profile">
+        <!-- Profile icon could be added here -->
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container mt-4">
+  <h1 class="mb-4">건의 게시판</h1>
+
+  <div class="mb-4">
+    <a href="/post/newPost/wishPost">새 게시물 작성</a>
+  </div>
+
+  <div class="list-group">
+    <!-- 타임리프를 사용하여 서버에서 주입된 게시글 목록을 렌더링 -->
+    <div th:each="post : ${posts}" class="list-group-item">
+      <a th:href="@{/post/getPost/wishPost/{id}(id=${post.id})}" class="list-group-item-action">
+        <h5 class="mb-1" th:text="${post.title}">Post Title</h5>
+        <p class="mb-1" th:text="${#strings.abbreviate(post.content, 100)}">Post Content</p>
+        <small th:text="${post.author}">Author</small>
+      </a>
+    </div>
+  </div>
+</main>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>

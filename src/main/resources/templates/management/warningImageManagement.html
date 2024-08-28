@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Reservation</title>
+    <link rel="stylesheet" href="../styles.css">
+    <title>경고문 등록</title>
+</head>
+
+<body>
+<header>
+    <div class="logo">
+        <a href="/"><img src="../home-icon.png" alt="Home Icon"></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/reservation/calendar">캘린더</a></li>
+            <li><a href="/post/carImagePostList">촬영 게시판</a></li>
+            <li><a href="/post/wishPostList">건의 게시판</a></li>
+            <li><a href="/reservation/textList">예약 목록</a></li>
+            <li><a href="/managerLogin">관리자 페이지</a></li>
+        </ul>
+    </nav>
+    <div class="profile">
+        <!--        <a href="#"><img src="profile-icon.png" alt="Profile Icon"></a>-->
+    </div>
+</header>
+<form id="warning-form" role="form" method="post" enctype="multipart/form-data" action="/ImageUpload">
+    <div class="form-group">
+        <input type="file" id="car-image-upload" name="file" class="form-control" accept="image/*"/>
+    </div>
+    <button type="submit">Upload</button>
+    <p id="response-message"></p>
+</form>
+
+<script>
+    document.getElementById('warning-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                // Redirect to home page if the response is successful
+                window.location.href = '/';
+            } else {
+                // Handle response error
+                return response.json().then(data => {
+                    document.getElementById('response-message').textContent = '이미지 등록에 실패했습니다: ' + (data.message || '알 수 없는 오류');
+                });
+            }
+        })
+        .catch(error => {
+            document.getElementById('response-message').textContent = '이미지 등록에 실패했습니다.';
+        });
+    });
+</script>
+</body>
+</html>

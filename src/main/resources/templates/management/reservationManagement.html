@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Reservation</title>
+    <link rel="stylesheet" href="../styles.css">
+    <title>차량 등록</title>
+</head>
+
+<body>
+<header>
+    <div class="logo">
+        <a href="/"><img src="../home-icon.png" alt="Home Icon"></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/reservation/calendar">캘린더</a></li>
+            <li><a href="/post/carImagePostList">촬영 게시판</a></li>
+            <li><a href="/post/wishPostList">건의 게시판</a></li>
+            <li><a href="/reservation/textList">예약 목록</a></li>
+            <li><a href="/managerLogin">관리자 페이지</a></li>
+        </ul>
+    </nav>
+    <div class="profile">
+        <!--        <a href="#"><img src="profile-icon.png" alt="Profile Icon"></a>-->
+    </div>
+</header>
+<h1>예약 확정</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>예약 번호</th>
+        <th>예약자 이름</th>
+        <th>차량 이름</th>
+        <th>차량 사용 시작 시간</th>
+        <th>차량 사용 끝나는 시간</th>
+        <th>예약 상태</th>
+        <th>예약 취소</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reservation : ${reservationTextList}">
+        <td th:text="${reservation.id}">예약 번호</td>
+        <td th:text="${reservation.name}">예약자 이름</td>
+        <td th:text="${reservation.car.name}">차량 이름</td>
+        <td th:text="${reservation.startTime}">차량 사용 시작 시간</td>
+        <td th:text="${reservation.endTime}">차량 사용 끝나는 시간</td>
+        <td th:text="${reservation.reservationStatus}">예약 상태</td>
+        <td>
+            <form th:if="${reservation.reservationStatus != 'CANCEL'}" th:action="@{/reservation/{id}/cancel(id=${reservation.id})}" method="post">
+                <button type="submit">취소</button>
+            </form>
+
+            <form th:if="${reservation.reservationStatus != 'CANCEL'}"
+                  th:action="@{/reservation/{id}/approve(id=${reservation.id})}"
+                  method="post">
+                <button type="submit">승인</button>
+            </form>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <a th:if="${currentPage > 0}" th:href="@{/reservation/textList/?page=${currentPage - 1}}">이전</a>
+    <span>페이지 [[${currentPage + 1}]]</span>
+    <a th:if="${currentPage < totalPages - 1}" th:href="@{/reservation/textList?page=${currentPage + 1}}">다음</a>
+</div>
+</body>
+</html>

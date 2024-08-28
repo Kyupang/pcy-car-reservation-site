@@ -1,0 +1,45 @@
+<<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Reservation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<header>
+    <div class="logo">
+        <a href="/"><img src="home-icon.png" alt="Home Icon"></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/reservation/calendar">캘린더</a></li>
+            <li><a href="/post/carImagePostList">촬영 게시판</a></li>
+            <li><a href="/post/wishPostList">건의 게시판</a></li>
+            <li><a href="/reservation/textList">예약 목록</a></li>
+            <li><a href="/managerLogin">관리자 페이지</a></li>
+        </ul>
+    </nav>
+    <div class="profile">
+        <!--        <a href="#"><img src="profile-icon.png" alt="Profile Icon"></a>-->
+    </div>
+</header>
+<div class="login-container">
+  <h2>관리자 로그인</h2>
+  <input type="password" id="password" placeholder="비밀번호를 입력하세요">
+  <button onclick="checkPassword()">로그인</button>
+</div>
+<script>
+    function checkPassword() {
+      const password = document.getElementById('password').value;
+      const correctPassword = '0000';
+
+      if (password === correctPassword) {
+        window.location.href = '/management'; // 관리자 페이지 URL로 변경하세요
+      } else {
+        alert('비밀번호가 잘못되었습니다.');
+      }
+    }
+  </script>
+</body>
+</html>
