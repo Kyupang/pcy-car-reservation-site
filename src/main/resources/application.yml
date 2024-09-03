@@ -1,17 +1,16 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:mydb
-    username: sa
-    password:
-    driverClassName: org.h2.Driver
+    url: jdbc:mysql://localhost:3306/reservationcar
+    username: root  # MySQL 사용자 이름으로 변경
+    password: 1234  # MySQL 비밀번호로 변경
+    driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update  # 기존 데이터가 있을 경우 'create' 대신 'update'를 사용하는 것이 좋습니다.
     properties:
       hibernate:
-        #       show_sql: true
         format_sql: true
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
 
 logging:
   level:
