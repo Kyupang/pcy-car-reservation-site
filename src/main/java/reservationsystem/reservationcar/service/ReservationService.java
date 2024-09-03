@@ -35,7 +35,7 @@ public class ReservationService {
         reservation.setPhoneNumber(requestDTO.getPhoneNumber());
         reservation.setAffiliation(requestDTO.getAffiliation());
         reservation.setPurpose(requestDTO.getPurpose());
-        reservation.setNumberOfPassengers(reservation.getNumberOfPassengers());
+        reservation.setNumberOfPassengers(requestDTO.getNumberOfPassengers());
         reservation.setStartTime(requestDTO.getStartTime());
         reservation.setEndTime(requestDTO.getEndTime());
         reservation.setReservationTime(LocalDateTime.now());
