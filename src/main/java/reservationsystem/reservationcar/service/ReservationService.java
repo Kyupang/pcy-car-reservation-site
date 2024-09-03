@@ -1,11 +1,13 @@
 package reservationsystem.reservationcar.service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reservationsystem.reservationcar.DTO.ReservationRequestDTO;
@@ -24,21 +26,16 @@ public class ReservationService {
     @Autowired private final CarRepository carRepository;
 
     @Transactional
-    public Long createReservation(Long carId, ReservationRequestDTO requestDTO) {
+    public ResponseEntity<?> createReservation(Long carId, ReservationRequestDTO requestDTO) {
         Car car = carRepository.findOne(carId);
-
-        boolean hasOverlap = reservationRepository.existsByCarIdAndTimeOverlap(
-                carId, requestDTO.getStartTime(), requestDTO.getEndTime());
-
-        if (hasOverlap) {
-            throw new IllegalArgumentException("해당 시간에 이미 예약이 있습니다.");
-        }
 
         Reservation reservation = new Reservation();
         reservation.setCar(car);
         reservation.setName(requestDTO.getName());
         reservation.setPhoneNumber(requestDTO.getPhoneNumber());
         reservation.setAffiliation(requestDTO.getAffiliation());
+        reservation.setPurpose(requestDTO.getPurpose());
+        reservation.setNumberOfPassengers(reservation.getNumberOfPassengers());
         reservation.setStartTime(requestDTO.getStartTime());
         reservation.setEndTime(requestDTO.getEndTime());
         reservation.setReservationTime(LocalDateTime.now());
@@ -46,7 +43,15 @@ public class ReservationService {
 
         reservationRepository.save(reservation);
 
-        return reservation.getId();
+        // 예약 성공 시 200 OK와 예약 ID를 반환
+        return ResponseEntity.ok(Collections.singletonMap("reservationId", reservation.getId()));
+    }
+
+    public boolean isTimeOverlap(Long carId, LocalDateTime startTime, LocalDateTime endTime) {
+        boolean hasOverlap = reservationRepository.existsByCarIdAndTimeOverlap(
+                carId, startTime, endTime);
+
+        return hasOverlap;
     }
 
     @Transactional

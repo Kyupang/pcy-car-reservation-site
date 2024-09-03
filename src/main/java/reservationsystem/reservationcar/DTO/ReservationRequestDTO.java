@@ -20,6 +20,12 @@ public class ReservationRequestDTO {
     @NotEmpty(message = "소속 입력은 필수입니다")
     private String affiliation;
 
+    @NotEmpty(message = "목적지 및 목적 입력은 필수입니다")
+    private String purpose;
+
+    @NotEmpty(message = "탑승인원 입력은 필수입니다")
+    private String numberOfPassengers;
+
     @NotNull
     private LocalDateTime startTime;
     @NotNull

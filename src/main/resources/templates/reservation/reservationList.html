@@ -1,41 +1,50 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Car Reservation</title>
-  <link rel="stylesheet" href="../styles.css">
+  <meta name="keywords" content="">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="description" content="">
+  <title>Reservation List</title>
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+  <link href="../default.css" rel="stylesheet" type="text/css" media="all">
+  <link href="../fonts.css" rel="stylesheet" type="text/css" media="all">
+  <!--[if IE 6]>
+  <link href="default_ie6.css" rel="stylesheet" type="text/css"/><![endif]-->
 </head>
 <body>
-<header>
-  <div class="logo">
-    <a href="/"><img src="../home-icon.png" alt="Home Icon"></a>
-  </div>
-    <nav>
-      <ul>
-        <li><a href="/reservation/calendar">캘린더</a></li>
-        <li><a href="/post/carImagePostList">촬영 게시판</a></li>
-        <li><a href="/post/wishPostList">건의 게시판</a></li>
-        <li><a href="/reservation/textList">예약 목록</a></li>
-        <li><a href="/managerLogin">관리자 페이지</a></li>
-      </ul>
-    </nav>
-  <div class="profile">
-    <!--        <a href="#"><img src="profile-icon.png" alt="Profile Icon"></a>-->
-  </div>
-</header>
-<h1>예약 목록</h1>
 
-<table border="1">
+<div id="header-wrapper">
+  <div id="header" class="container">
+    <div id="logo">
+      <a href="/"><img src="../home-icon.png" alt="Home Icon"></a>
+      <h1><a href="/">평촌교회 청년부 차량 예약 시스템</a></h1>
+    </div>
+    <div id="menu">
+      <ul>
+        <li><a href="/reservation/calendar" accesskey="1" title="캘린더">캘린더</a></li>
+        <li><a href="/post/carImagePostList" accesskey="2" title="촬영 게시판">촬영 게시판</a></li>
+        <li><a href="/post/wishPostList" accesskey="3" title="건의 게시판">건의 게시판</a></li>
+        <li><a href="/reservation/textList" accesskey="4" title="예약 목록">예약 목록</a></li>
+        <li><a href="/managerLogin" accesskey="5" title="관리자 페이지">관리자 페이지</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div><br><br></div>
+<table id="reservation-table">
   <thead>
   <tr>
     <th>예약 번호</th>
     <th>예약자 이름</th>
     <th>차량 이름</th>
+    <th>신청 부서(팀)</th>
+    <th>사용 목적</th>
     <th>차량 사용 시작 시간</th>
     <th>차량 사용 끝나는 시간</th>
     <th>예약 상태</th>
-    <th>예약 취소</th>
   </tr>
   </thead>
   <tbody>
@@ -43,23 +52,48 @@
     <td th:text="${reservation.id}">예약 번호</td>
     <td th:text="${reservation.name}">예약자 이름</td>
     <td th:text="${reservation.car.name}">차량 이름</td>
+    <td th:text="${reservation.affiliation}">신청 부서(팀)</td>
+    <td th:text="${reservation.purpose}">사용 목적</td>
     <td th:text="${reservation.startTime}">차량 사용 시작 시간</td>
     <td th:text="${reservation.endTime}">차량 사용 끝나는 시간</td>
-    <td th:text="${reservation.reservationStatus}">예약 상태</td>
     <td>
-      <form th:if="${reservation.reservationStatus != 'CANCEL'}" th:action="@{/reservation/{id}/cancel(id=${reservation.id})}" method="post">
-        <button type="submit">취소</button>
-      </form>
+      <span th:text="${reservation.reservationStatus.name() == 'APPROVED' ? '승인됨' :
+                     reservation.reservationStatus.name() == 'CANCEL' ? '취소됨' :
+                     reservation.reservationStatus.name() == 'REQUESTED' ? '요청됨' :
+                     '알 수 없음'}">예약 상태</span>
     </td>
+
 
   </tr>
   </tbody>
 </table>
+<ul class="pagination">
+  <!-- 이전 버튼 -->
+  <li th:if="${currentPage > 0}">
+    <a th:href="@{/reservation/textList/?page=${currentPage - 1}}">이전</a>
+  </li>
+  <li th:unless="${currentPage > 0}">
+    <a class="disabled">이전</a>
+  </li>
 
-<div>
-  <a th:if="${currentPage > 0}" th:href="@{/reservation/textList/?page=${currentPage - 1}}">이전</a>
-  <span>페이지 [[${currentPage + 1}]]</span>
-  <a th:if="${currentPage < totalPages - 1}" th:href="@{/reservation/textList?page=${currentPage + 1}}">다음</a>
+  <!-- 현재 페이지 -->
+  <li>
+    <span>페이지 [[${currentPage + 1}]]</span>
+  </li>
+
+  <!-- 다음 버튼 -->
+  <li th:if="${currentPage < totalPages - 1}">
+    <a th:href="@{/reservation/textList?page=${currentPage + 1}}">다음</a>
+  </li>
+  <li th:unless="${currentPage < totalPages - 1}">
+    <a class="disabled">다음</a>
+  </li>
+</ul>
+
+<div><br><br></div>
+<div id="wrapper1">
+  <div id="welcome" class="container">
+  </div>
 </div>
 </body>
 </html>

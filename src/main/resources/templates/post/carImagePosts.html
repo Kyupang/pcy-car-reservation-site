@@ -1,57 +1,108 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>촬영 게시판</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
+    <meta name="keywords" content="">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="description" content="">
+    <title></title>
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+    <link href="../default.css" rel="stylesheet" type="text/css" media="all">
+    <link href="../fonts.css" rel="stylesheet" type="text/css" media="all">
+    <!--[if IE 6]>
+    <link href="default_ie6.css" rel="stylesheet" type="text/css"/><![endif]-->
 </head>
 <body>
-<header>
-    <div class="container-fluid">
-        <div class="d-flex justify-content-between align-items-center p-3 bg-light shadow-sm">
-            <a href="/" class="logo">
-                <img src="../home-icon.png" alt="Home Icon" class="img-fluid" style="width: 40px;">
-            </a>
-            <nav>
-                <ul>
-                    <li><a href="/reservation/calendar">캘린더</a></li>
-                    <li><a href="/post/carImagePostList">촬영 게시판</a></li>
-                    <li><a href="/post/wishPostList">건의 게시판</a></li>
-                    <li><a href="/reservation/textList">예약 목록</a></li>
-                    <li><a href="/managerLogin">관리자 페이지</a></li>
-                </ul>
-            </nav>
-            <div class="profile">
-                <!-- Profile icon could be added here -->
-            </div>
+
+<div id="header-wrapper">
+    <div id="header" class="container">
+        <div id="logo">
+            <a href="/"><img src="../home-icon.png" alt="Home Icon"></a>
+            <h1><a href="/">평촌교회 청년부 차량 예약 시스템</a></h1>
+        </div>
+        <div id="menu">
+            <ul>
+                <li><a href="/reservation/calendar" accesskey="1" title="캘린더">캘린더</a></li>
+                <li><a href="/post/carImagePostList" accesskey="2" title="촬영 게시판">촬영 게시판</a></li>
+                <li><a href="/post/wishPostList" accesskey="3" title="건의 게시판">건의 게시판</a></li>
+                <li><a href="/reservation/textList" accesskey="4" title="예약 목록">예약 목록</a></li>
+                <li><a href="/managerLogin" accesskey="5" title="관리자 페이지">관리자 페이지</a></li>
+            </ul>
         </div>
     </div>
-</header>
+</div>
 
-<main class="container mt-4">
-    <h1 class="mb-4">촬영 게시판</h1>
-
-    <div class="mb-4">
-        <a href="/post/newPost/carImagePost">새 게시물 작성</a>
-    </div>
-
-    <div class="list-group">
-        <!-- 타임리프를 사용하여 서버에서 주입된 게시글 목록을 렌더링 -->
-        <div th:each="post : ${posts}" class="list-group-item">
-            <a th:href="@{/post/getPost/carImagePost/{id}(id=${post.id})}" class="list-group-item-action">
-                <h5 class="mb-1" th:text="${post.title}">Post Title</h5>
-                <p class="mb-1" th:text="${#strings.abbreviate(post.content, 100)}">Post Content</p>
-                <small th:text="${post.author}">Author</small>
-            </a>
+<div><br><br></div>
+<section class="notice">
+    <div class="page-title">
+        <div class="container">
+            <h3 class="post-list-title">촬영 게시판</h3>
+            <a href="/post/newPost/carImagePost" class="new-post-link">새 게시물 작성</a>
         </div>
     </div>
-</main>
 
-<!-- Bootstrap JS and dependencies -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    <!-- board list area -->
+    <div id="board-list">
+        <div class="container">
+            <table class="board-table">
+                <thead>
+                <tr>
+                    <th scope="col" class="th-num">번호</th>
+                    <th scope="col" class="th-title">제목</th>
+                    <th scope="col" class="th-author">작성자</th>
+                    <th scope="col" class="th-date">등록일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- 타임리프를 사용하여 서버에서 주입된 게시글 목록을 렌더링 -->
+                <tr th:each="post : ${posts}">
+                    <td th:text="${post.id}">번호</td>
+                    <td>
+                        <a th:href="@{/post/getPost/carImagePost/{id}(id=${post.id})}" th:text="${post.title}">제목</a>
+                    </td>
+                    <td th:text="${post.author}">작성자</td>
+                    <td th:text="${post.timestamp}">등록일</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <ul class="pagination">
+                <!-- 이전 버튼 -->
+                <li th:if="${currentPage > 0}">
+                    <a th:href="@{/post/carImagePostList(page=${currentPage - 1}, size=${size})}">이전</a>
+                </li>
+                <li th:unless="${currentPage > 0}">
+                    <a class="disabled">이전</a>
+                </li>
+
+                <!-- 현재 페이지 -->
+                <li>
+                    <span>페이지 [[${currentPage + 1}]]</span>
+                </li>
+
+                <!-- 다음 버튼 -->
+                <li th:if="${currentPage < totalPages - 1}">
+                    <a th:href="@{/post/carImagePostList(page=${currentPage + 1}, size=${size})}">다음</a>
+                </li>
+                <li th:unless="${currentPage < totalPages - 1}">
+                    <a class="disabled">다음</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+
+</section>
+
+<!--footer-->
+<div><br><br></div>
+<div id="wrapper1">
+    <div id="welcome" class="container">
+    </div>
+</div>
+
 </body>
 </html>

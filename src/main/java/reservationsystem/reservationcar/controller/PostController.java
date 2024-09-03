@@ -1,9 +1,11 @@
 package reservationsystem.reservationcar.controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import reservationsystem.reservationcar.DTO.PostDTO;
+import reservationsystem.reservationcar.domain.Post;
 import reservationsystem.reservationcar.service.PostService;
 
 @Controller
@@ -25,16 +28,26 @@ public class PostController {
 
     // 게시글 목록을 보여주는 페이지
     @GetMapping("/post/carImagePostList")
-    public String showCarPosts(Model model) {
-        List<PostDTO> posts = postService.getAllPosts("carImagePost"); // 수정된 부분: 모든 게시글을 가져와 모델에 추가
-        model.addAttribute("posts", posts);
+    public String showCarPosts(@RequestParam(defaultValue = "0") int page,
+                               @RequestParam(defaultValue = "10") int size,
+                               Model model) {
+        Page<PostDTO> postPage = postService.getAllPosts("carImagePost", page, size);
+        model.addAttribute("posts", postPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", postPage.getTotalPages());
+        model.addAttribute("totalItems", postPage.getTotalElements());
         return "post/carImagePosts"; // carImagePosts.html 페이지로 반환
     }
 
     @GetMapping("/post/wishPostList")
-    public String showWishPosts(Model model) {
-        List<PostDTO> posts = postService.getAllPosts("wishPost"); // 수정된 부분: 모든 게시글을 가져와 모델에 추가
-        model.addAttribute("posts", posts);
+    public String showWishPosts(@RequestParam(defaultValue = "0") int page,
+                                @RequestParam(defaultValue = "10") int size,
+                                Model model) {
+        Page<PostDTO> postPage = postService.getAllPosts("wishPost", page, size);
+        model.addAttribute("posts", postPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", postPage.getTotalPages());
+        model.addAttribute("totalItems", postPage.getTotalElements());
         return "post/wishPosts"; // wishPosts.html
     }
 
@@ -66,7 +79,7 @@ public class PostController {
         postDTO.setTitle(title);
         postDTO.setContent(content);
         postDTO.setAuthor(author);
-
+        postDTO.setTimestamp(LocalDateTime.now());
         PostDTO createdPostDTO = postService.savePost(postDTO, files, boardType);
 
         model.addAttribute("post", createdPostDTO);

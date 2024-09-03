@@ -28,8 +28,11 @@ public class ReservationRepository {
 
 
     public List<Reservation> findByCarId(Long carId) {
-        return em.createQuery("select r from Reservation r where r.car.id = :carId", Reservation.class)
+        return em.createQuery(
+                        "select r from Reservation r where r.car.id = :carId and r.reservationStatus != :status",
+                        Reservation.class)
                 .setParameter("carId", carId)
+                .setParameter("status", ReservationStatus.CANCEL)
                 .getResultList();
     }
 

@@ -85,8 +85,22 @@
 <!--</body>-->
 <!--</html>-->
 
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <meta name="keywords" content="">-->
+<!--    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">-->
+<!--    <meta name="description" content="">-->
+<!--    <title>Car Reservation</title>-->
+<!--    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">-->
+<!--    <link href="default.css" rel="stylesheet" type="text/css" media="all">-->
+<!--    <link href="fonts.css" rel="stylesheet" type="text/css" media="all">-->
+<!--    &lt;!&ndash;[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]&ndash;&gt;-->
+<!--</head>-->
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,14 +111,16 @@
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
     <link href="default.css" rel="stylesheet" type="text/css" media="all">
     <link href="fonts.css" rel="stylesheet" type="text/css" media="all">
-    <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+    <!--[if IE 6]>
+    <link href="default_ie6.css" rel="stylesheet" type="text/css"/><![endif]-->
+
 </head>
 <body>
 <div id="header-wrapper">
     <div id="header" class="container">
         <div id="logo">
             <a href="/"><img src="home-icon.png" alt="Home Icon"></a>
-            <h1><a href="/">PYCH-Youth CAR Reservation</a></h1>
+            <h1><a href="/">평촌교회 청년부 차량 예약 시스템</a></h1>
         </div>
         <div id="menu">
             <ul>
@@ -131,6 +147,19 @@
 
 <div class="button">
     <button id="reserve-button">예약페이지로 이동</button>
+</div>
+
+<div><br></div>
+
+<div id="wrapper1">
+    <div id="welcome" class="container">
+<!--        <div class="title">-->
+<!--            <h2>Welcome to our website</h2>-->
+<!--            <span class="byline">Mauris vulputate dolor sit amet nibh</span> </div>-->
+<!--        <div class="content">-->
+<!--            <p>This is <strong>Adequately</strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>. The photos in this template are from <a href="http://fotogrph.com/"> Fotogrph</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you're pretty much free to do whatever you want with it (even use it commercially) provided you give us credit for it. Have fun :) </p>-->
+<!--            <a href="#" class="button">Etiam posuere</a> </div>-->
+    </div>
 </div>
 
 <script>

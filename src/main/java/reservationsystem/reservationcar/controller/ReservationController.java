@@ -61,6 +61,8 @@ public class ReservationController {
             @RequestParam("name") String name,
             @RequestParam("phoneNumber") String phoneNumber,
             @RequestParam("affiliation") String affiliation,
+            @RequestParam("purpose") String purpose,
+            @RequestParam("numberOfPassengers") String numberOfPassengers,
             @RequestParam("startTime") LocalDateTime startTime,
             @RequestParam("endTime") LocalDateTime endTime,
             Model model) {
@@ -69,6 +71,8 @@ public class ReservationController {
         requestDTO.setName(name);
         requestDTO.setPhoneNumber(phoneNumber);
         requestDTO.setAffiliation(affiliation);
+        requestDTO.setPurpose(purpose);
+        requestDTO.setNumberOfPassengers(numberOfPassengers);
         requestDTO.setStartTime(startTime);
         requestDTO.setEndTime(endTime);
 
@@ -84,6 +88,7 @@ public class ReservationController {
         reservationService.createReservation(carId, requestDTO);
         return "redirect:/";
     }
+
     // 예약 시스템
     @PostMapping("/reservation/new")
     @ResponseBody // 예약 만들기, 오류없이 예약 만들기
@@ -94,6 +99,12 @@ public class ReservationController {
         if (result.hasErrors()) {
             response.put("success", false);
             response.put("errorMessage", "모든 필드를 올바르게 입력해 주세요.");
+            return ResponseEntity.ok(response);
+        }
+
+        if (reservationService.isTimeOverlap(carId, requestDTO.getStartTime(), requestDTO.getEndTime())) {
+            response.put("success", false);
+            response.put("errorMessage", "선택한 시간에 이미 예약이 존재합니다. 다른 시간을 선택해 주세요.");
             return ResponseEntity.ok(response);
         }
 
@@ -115,6 +126,7 @@ public class ReservationController {
         return reservations.stream()
                 .map(reservation -> new ReservationResultDTO(
                         reservation.getCar().getName(),
+                        reservation.getAffiliation(),
                         reservation.getStartTime(),
                         reservation.getEndTime()))
                 .collect(Collectors.toList());
@@ -134,8 +146,9 @@ public class ReservationController {
         return reservations.stream()
                 .map(reservation -> new ReservationResultDTO(
                         reservation.getCar().getName(),
+                        reservation.getAffiliation(),
                         reservation.getStartTime(),
-                        reservation.getEndTime()))  // 차량 이름도 반환
+                        reservation.getEndTime()))
                 .collect(Collectors.toList());
     }
     
@@ -183,7 +196,7 @@ public class ReservationController {
         } catch (IllegalStateException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
-        return "redirect:/reservation/textList";
+        return "redirect:/reservation/management";
     }
 
     // 예약 승인 메서드
@@ -195,6 +208,6 @@ public class ReservationController {
         } catch (IllegalStateException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
-        return "redirect:/reservation/textList";
+        return "redirect:/reservation/management";
     }
 }

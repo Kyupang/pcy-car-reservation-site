@@ -1,13 +1,14 @@
 	html, body
 	{
 		height: 100%;
+
 	}
 	
 	body
 	{
 		margin: 0px;
 		padding: 0px;
-		background: #333333;
+		background: #f0ebeb;
 		font-family: 'Source Sans Pro', sans-serif;
 		font-size: 12pt;
 		font-weight: 400;
@@ -60,106 +61,400 @@
 		margin: 0px auto;
 		width: 1200px;
 	}
-	
+
+/* 반응형 스타일 */
+
+/* 모바일 장치 (600px 이하) */
+@media screen and (max-width: 600px) {
+    #welcome, #newsletter, #copyright {
+        padding: 2em 1em;
+    }
+
+    #newsletter .content, #post-form-container, .post-detail-container {
+        width: 100%;
+        padding: 1em;
+        box-sizing: border-box;
+    }
+
+    .column1, .column2, .column3, .column4 {
+        width: 100%;
+        float: none;
+        margin-right: 0;
+        margin-bottom: 24px;
+    }
+
+    .pagination {
+        flex-direction: column;
+    }
+
+    .pagination a, .pagination span {
+        margin: 5px 0;
+    }
+
+    #reservation-table {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .btn-primary {
+        padding: 8px 16px;
+    }
+
+    .board-table {
+        font-size: 12px;
+    }
+}
+
+/* 태블릿 (601px ~ 1024px) */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+    #welcome, #newsletter, #copyright {
+        padding: 3em 2em;
+    }
+
+    #newsletter .content, #post-form-container, .post-detail-container {
+        width: 90%;
+        padding: 1.5em;
+        box-sizing: border-box;
+    }
+
+    .column1, .column2, .column3, .column4 {
+        width: 45%;
+        float: left;
+        margin-right: 24px;
+    }
+
+    .pagination {
+        flex-direction: row;
+    }
+
+    .pagination a, .pagination span {
+        margin: 0 5px;
+    }
+
+    #reservation-table {
+        width: 100%;
+        font-size: 15px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 15px;
+    }
+
+    .btn-primary {
+        padding: 10px 20px;
+    }
+
+    .board-table {
+        font-size: 14px;
+    }
+}
+
+/* 데스크탑 (1025px 이상) */
+@media screen and (min-width: 1025px) {
+    #welcome, #newsletter, #copyright {
+        padding: 4em 4em;
+    }
+
+    #newsletter .content, #post-form-container, .post-detail-container {
+        width: 80%;
+        padding: 2em;
+        box-sizing: border-box;
+    }
+
+    .column1, .column2, .column3, .column4 {
+        width: 23%;
+        float: left;
+        margin-right: 24px;
+    }
+
+    .pagination {
+        flex-direction: row;
+    }
+
+    .pagination a, .pagination span {
+        margin: 0 10px;
+    }
+
+    #reservation-table {
+        width: 75%;
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 14px 28px;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        padding: 12px 24px;
+    }
+
+    .board-table {
+        font-size: 16px;
+    }
+}
+
+	/* login*/
+.login-container {
+            width: 100%;
+            max-width: 400px;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-left: 37%;
+        }
+
+        .login-container h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .login-container input[type="password"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+
+
 
 /*********************************************************************************/
 /* Form Style                                                                    */
 /*********************************************************************************/
+        .car-form-container {
+                    width: 80%;
+                    max-width: 600px;
+                    margin: 2rem auto;
+                    padding: 2rem;
+                    background: #fff;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    border-radius: 8px;
+                }
 
-		form
-		{
-		}
-		
-			form label
-			{
-				display: block;
-				text-align: left;
-				margin-bottom: 0.5em;
-			}
-			
-			form .submit
-			{
-				margin-top: 2em;
-				background: #8DCB89;
-				border-radius: 8px;
-				line-height: 1.5em;
-				font-size: 1.3em;
-			}
-		
-			form input.text,
-			form select,
-			form textarea
-			{
-				position: relative;
-				-webkit-appearance: none;
-				display: block;
-				border: 0;
-				background: #fff;
-				background: rgba(255,255,255,0.75);
-				width: 100%;
-				border-radius: 0.50em;
-				margin: 1em 0em;
-				padding: 1.50em 1em;
-				box-shadow: inset 0 0.1em 0.1em 0 rgba(0,0,0,0.05);
-				border: solid 1px rgba(0,0,0,0.15);
-				-moz-transition: all 0.35s ease-in-out;
-				-webkit-transition: all 0.35s ease-in-out;
-				-o-transition: all 0.35s ease-in-out;
-				-ms-transition: all 0.35s ease-in-out;
-				transition: all 0.35s ease-in-out;
-				font-family: 'Source Sans Pro', sans-serif;
-				font-size: 1em;
-				outline: none;
-			}
+                .form-group {
+                    margin-bottom: 1rem;
+                }
 
-				form input.text:hover,
-				form select:hover,
-				form textarea:hover
-				{
-				}
+                .form-group label {
+                    display: block;
+                    font-weight: bold;
+                    margin-bottom: 0.5rem;
+                    color: #333;
+                }
 
-				form input.text:focus,
-				form select:focus,
-				form textarea:focus
-				{
-					box-shadow: 0 0 2px 1px #E0E0E0;
-					background: #fff;
-				}
-				
-				form textarea
-				{
-					min-height: 12em;
-				}
+                .form-group input[type="text"],
+                .form-group input[type="file"] {
+                    width: 100%;
+                    padding: 0.75rem;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    box-sizing: border-box;
+                }
 
-				form .formerize-placeholder
-				{
-					color: #555 !important;
-				}
+                .form-group input[type="text"]:focus,
+                .form-group input[type="file"]:focus {
+                    border-color: #007bff;
+                    outline: none;
+                }
 
-				form ::-webkit-input-placeholder
-				{
-					color: #555 !important;
-				}
+                .error-message {
+                    color: #e74c3c;
+                    font-size: 0.875rem;
+                    margin-top: 0.25rem;
+                }
 
-				form :-moz-placeholder
-				{
-					color: #555 !important;
-				}
+                .car-image {
+                    margin: 1rem 0;
+                    text-align: center;
+                }
 
-				form ::-moz-placeholder
-				{
-					color: #555 !important;
-				}
+                .car-image img {
+                    max-width: 100%;
+                    height: auto;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+                }
 
-				form :-ms-input-placeholder
-				{
-					color: #555 !important;
-				}
+                .submit {
+                    display: inline-block;
+                    padding: 0.75rem 1.5rem;
+                    font-size: 1rem;
+                    color: #fff;
+                    background-color: #8dcb89;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
 
-				form ::-moz-focus-inner
-				{
-					border: 0;
-				}
+                .submit:hover {
+                    background-color: #0056b3;
+                }
+
+                .response-message {
+                    margin-top: 1rem;
+                    font-size: 1rem;
+                    color: #333;
+                }
+
+
+		.custom-form {
+            display: flex;
+            flex-direction: column; /* 가로 방향으로 배치 */
+            justify-content: space-between; /* 폼과 캘린더 사이의 공간을 분배 */
+            align-items: flex-start; /* 폼과 캘린더의 수직 정렬을 상단으로 맞춤 */
+            flex-wrap: wrap; /* 화면 크기에 따라 자동으로 줄 바꿈 */
+            height: 100vh; /* 전체 화면 높이 */
+            padding: 1em; /* 폼 주변의 여백 */
+            box-sizing: border-box; /* 패딩과 테두리를 포함하여 요소의 너비와 높이를 계산 */
+            margin-left: 20%; /* 자동으로 왼쪽 여백을 추가 */
+        }
+
+        .custom-form .form-wrapper {
+            display: flex;
+            flex-direction: row; /* 입력 폼과 캘린더를 가로 방향으로 배치 */
+            width: 85%; /* 전체 너비를 차지하도록 설정 */
+            gap: 1em; /* 입력 폼과 캘린더 사이의 간격 */
+        }
+
+        .custom-form .form-container {
+            flex: 1; /* 입력 폼이 가용 공간을 차지하도록 설정 */
+            display: flex;
+            flex-direction: column; /* 입력 폼 내부 요소를 수직으로 배치 */
+            gap: 1em; /* 입력 폼 요소 간의 간격 */
+        }
+
+        .custom-form #calendar {
+            flex: 3; /* 캘린더가 가용 공간을 차지하도록 설정 */
+            min-width: 600px; /* 캘린더의 최소 너비를 설정 */
+        }
+
+        .custom-form .form-button-container {
+            margin-top: auto; /* 폼 요소가 위쪽으로 붙게 함 */
+            text-align: center; /* 버튼을 가운데로 정렬 */
+        }
+
+        /* 버튼 스타일 */
+        .custom-form .submit {
+            background: #8DCB89;
+            border-radius: 8px;
+            line-height: 1.5em;
+            font-size: 1.3em;
+            color: #fff;
+            padding: 0.75em 1.5em;
+            border: none;
+            cursor: pointer;
+            display: inline-block; /* 버튼을 인라인 블록 요소로 설정 */
+            margin: 0 auto; /* 버튼을 가운데 정렬 */
+        }
+
+        .custom-form label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+
+        .custom-form input.text,
+        .custom-form select,
+        .custom-form textarea {
+            position: relative;
+            -webkit-appearance: none;
+            display: block;
+            border: 0;
+            background: #fff;
+            background: rgba(255,255,255,0.75);
+            width: 100%;
+            border-radius: 0.50em;
+            margin: 1em 0em;
+            padding: 1.50em 1em;
+            box-shadow: inset 0 0.1em 0.1em 0 rgba(0,0,0,0.05);
+            border: solid 1px rgba(0,0,0,0.15);
+            -moz-transition: all 0.35s ease-in-out;
+            -webkit-transition: all 0.35s ease-in-out;
+            -o-transition: all 0.35s ease-in-out;
+            -ms-transition: all 0.35s ease-in-out;
+            transition: all 0.35s ease-in-out;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1em;
+            outline: none;
+        }
+
+        .custom-form input.text:hover,
+        .custom-form select:hover,
+        .custom-form textarea:hover {
+            /* 호버 상태 스타일을 추가할 수 있습니다 */
+        }
+
+        .custom-form input.text:focus,
+        .custom-form select:focus,
+        .custom-form textarea:focus {
+            box-shadow: 0 0 2px 1px #E0E0E0;
+            background: #fff;
+        }
+
+        .custom-form textarea {
+            min-height: 12em;
+        }
+
+        .custom-form .formerize-placeholder {
+            color: #555 !important;
+        }
+
+        .custom-form ::-webkit-input-placeholder {
+            color: #555 !important;
+        }
+
+        .custom-form :-moz-placeholder {
+            color: #555 !important;
+        }
+
+        .custom-form ::-moz-placeholder {
+            color: #555 !important;
+        }
+
+        .custom-form :-ms-input-placeholder {
+            color: #555 !important;
+        }
+
+        .custom-form ::-moz-focus-inner {
+            border: 0;
+        }
+
+
+
 
 /*car image style*/
 
@@ -248,11 +543,48 @@
 	ul.style1
 	{
 	}
+    .management-menu {
+        display: flex;
+        justify-content: center; /* Center the menu container */
+        padding: 10px; /* Add some padding */
+        background-color: #f8f9fa; /* Light background color */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+    .menu-list {
+        list-style-type: none; /* Remove default list styling */
+        padding: 0;
+        margin: 0;
+        display: flex; /* Display list items in a row */
+    }
+
+    .menu-list li {
+        margin: 0 15px; /* Space between menu items */
+    }
+
+    .menu-list a {
+        text-decoration: none; /* Remove underline from links */
+        color: #007bff; /* Link color */
+        font-size: 16px; /* Font size */
+        font-weight: 500; /* Medium font weight */
+    }
+
+    .menu-list a:hover {
+        color: #0056b3; /* Darker color on hover */
+    }
+
+    .menu-list span {
+        display: inline-block;
+        padding: 5px 10px;
+    }
 
 
 /*********************************************************************************/
 /* Social Icon Styles                                                            */
 /*********************************************************************************/
+
+
 
 	ul.contact
 	{
@@ -503,14 +835,14 @@
 	#welcome
 	{
 		overflow: hidden;
-		padding: 8em 0em;
+		padding: 4em 0em;
 		text-align: center;
 		color: rgba(255,255,255,0.3);
 	}
 	
 	#welcome .content
 	{
-		padding: 0em 8em;
+		padding: 0em 4em;
 	}
 	
 	
@@ -663,4 +995,516 @@
 	{
 		float: right;
 	}
-	
+
+/*예약 리스트 테이블*/
+/* 특정 테이블에만 적용할 CSS */
+#reservation-table {
+  width: 75%;
+  border-collapse: collapse;
+  margin: 0 auto;
+
+}
+
+/* 테이블 헤더 스타일 */
+#reservation-table thead {
+  background-color: #f2f2f2;
+}
+
+#reservation-table th {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+
+/* 테이블 바디 스타일 */
+#reservation-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#reservation-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* 버튼 스타일 */
+#reservation-table button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#reservation-table button:hover {
+  background-color: #e60000;
+}
+
+/* 폼 스타일 */
+#reservation-table form {
+  display: inline;
+}
+    /* 페이지네이션 컨테이너 */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    /* 페이지네이션 링크 */
+    .pagination a,
+    .pagination span {
+        color: #428bca;
+        padding: 10px 15px;
+        margin: 0 5px;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* 현재 페이지 */
+    .pagination span {
+        background-color: #8DCB89;
+        color: white;
+        font-weight: bold;
+    }
+
+    /* 호버 효과 */
+    .pagination a:hover {
+        background-color: #d8e7f3;
+        color: #333;
+    }
+
+    /* 비활성화된 링크 */
+    .pagination a.disabled {
+        pointer-events: none;
+        cursor: default;
+        color: #999;
+        background-color: #f5f5f5;
+        border-color: #ddd;
+    }
+
+    /* 모바일 친화적인 디자인 */
+    @media screen and (max-width: 600px) {
+        .pagination {
+            flex-direction: column;
+        }
+        .pagination a,
+        .pagination span {
+            margin: 5px 0;
+        }
+    }
+
+    /* post */
+
+        table {
+          border-collapse: collapse;
+          border-spacing: 0;
+        }
+        section.notice {
+          padding: 80px 0;
+        }
+
+        .page-title {
+          margin-bottom: 60px;
+        }
+        .page-title h3 {
+          font-size: 28px;
+          color: #333333;
+          font-weight: 400;
+          text-align: center;
+        }
+
+        .new-post-link {
+          margin-left: 90%;
+        }
+
+        #board-search .search-window {
+          padding: 15px 0;
+          background-color: #f9f7f9;
+        }
+        #board-search .search-window .search-wrap {
+          position: relative;
+        /*   padding-right: 124px; */
+          margin: 0 auto;
+          width: 80%;
+          max-width: 564px;
+        }
+        #board-search .search-window .search-wrap input {
+          height: 40px;
+          width: 100%;
+          font-size: 14px;
+          padding: 7px 14px;
+          border: 1px solid #ccc;
+        }
+        #board-search .search-window .search-wrap input:focus {
+          border-color: #333;
+          outline: 0;
+          border-width: 1px;
+        }
+        #board-search .search-window .search-wrap .btn {
+          position: absolute;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          width: 108px;
+          padding: 0;
+          font-size: 16px;
+        }
+
+        .board-table {
+          font-size: 13px;
+          width: 100%;
+          border-top: 1px solid #ccc;
+          border-bottom: 1px solid #ccc;
+        }
+
+        .board-table a {
+          color: #333;
+          display: inline-block;
+          line-height: 1.4;
+          word-break: break-all;
+          vertical-align: middle;
+        }
+        .board-table a:hover {
+          text-decoration: underline;
+        }
+        .board-table th {
+          text-align: center;
+        }
+
+        .board-table .th-num {
+          width: 100px;
+          text-align: center;
+        }
+
+        .board-table .th-date {
+          width: 200px;
+        }
+
+        .board-table th, .board-table td {
+          padding: 14px 0;
+        }
+
+        .board-table tbody td {
+          border-top: 1px solid #e7e7e7;
+          text-align: center;
+        }
+
+        .board-table tbody th {
+          padding-left: 28px;
+          padding-right: 14px;
+          border-top: 1px solid #e7e7e7;
+          text-align: left;
+        }
+
+        .board-table tbody th p{
+          display: none;
+        }
+
+        .btn {
+          display: inline-block;
+          padding: 0 30px;
+          font-size: 15px;
+          font-weight: 400;
+          background: transparent;
+          text-align: center;
+          white-space: nowrap;
+          vertical-align: middle;
+          -ms-touch-action: manipulation;
+          touch-action: manipulation;
+          cursor: pointer;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          border: 1px solid transparent;
+          text-transform: uppercase;
+          -webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          border-radius: 0;
+          -webkit-transition: all 0.3s;
+          -moz-transition: all 0.3s;
+          -ms-transition: all 0.3s;
+          -o-transition: all 0.3s;
+          transition: all 0.3s;
+        }
+
+        .btn-dark {
+          background: #555;
+          color: #fff;
+        }
+
+        .btn-dark:hover, .btn-dark:focus {
+          background: #373737;
+          border-color: #373737;
+          color: #fff;
+        }
+
+        .btn-dark {
+          background: #555;
+          color: #fff;
+        }
+
+        .btn-dark:hover, .btn-dark:focus {
+          background: #373737;
+          border-color: #373737;
+          color: #fff;
+        }
+
+        /* reset */
+
+        * {
+          list-style: none;
+          text-decoration: none;
+          padding: 0;
+          margin: 0;
+          box-sizing: border-box;
+        }
+        .clearfix:after {
+          content: '';
+          display: block;
+          clear: both;
+        }
+        .container {
+          width: 1100px;
+          margin: 0 auto;
+        }
+        .blind {
+          position: absolute;
+          overflow: hidden;
+          clip: rect(0 0 0 0);
+          margin: -1px;
+          width: 1px;
+          height: 1px;
+        }
+/* post form */
+        .post-form-container {
+          max-width: 800px;
+          margin: 2rem auto;
+          padding: 1.5rem;
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-form-title {
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+          color: #343a40;
+        }
+
+        .post-form {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .post-form-group {
+          margin-bottom: 1rem;
+        }
+
+        .post-form-label {
+          display: block;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+          color: #495057;
+        }
+
+        .post-form-input,
+        .post-form-textarea,
+        .post-form-file {
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid #ced4da;
+          border-radius: 4px;
+        }
+
+        .post-form-textarea {
+          resize: vertical;
+        }
+
+        .post-form-submit-btn {
+          display: inline-block;
+          padding: 0.75rem 1.5rem;
+          font-size: 1rem;
+          color: #fff;
+          background-color: #007bff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+        }
+
+        .post-form-submit-btn:hover {
+          background-color: #0056b3;
+        }
+
+        .post-form-file {
+          border: none;
+          padding: 0;
+          background-color: #e9ecef;
+        }
+
+
+        .post-detail-container {
+          max-width: 800px;
+          margin: 2rem auto;
+          padding: 1.5rem;
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-detail-title {
+          font-size: 2rem;
+          color: #343a40;
+          margin-bottom: 1.5rem;
+        }
+
+        .post-detail-author,
+        .post-detail-content,
+        .post-detail-images {
+          margin-bottom: 1.5rem;
+        }
+
+        .post-detail-author-label,
+        .post-detail-content-label,
+        .post-detail-images-label {
+          font-weight: 600;
+          color: #495057;
+        }
+
+        .post-detail-author-name,
+        .post-detail-content-text {
+          color: #212529;
+        }
+
+        .post-detail-image {
+          width: 100%;
+          height: auto;
+          border-radius: 4px;
+          margin-bottom: 1rem;
+        }
+
+        .post-detail-back {
+          text-align: center;
+        }
+
+        .post-detail-back-btn {
+          display: inline-block;
+          padding: 0.75rem 1.5rem;
+          font-size: 1rem;
+          color: #fff;
+          background-color: #6c757d;
+          border: none;
+          border-radius: 4px;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+        .post-detail-back-btn:hover {
+          background-color: #5a6268;
+        }
+
+        /* 예약 확인 */
+
+        /* 예약 컨테이너 스타일 */
+        .reservation-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 제목 스타일 */
+        .reservation-title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* 예약 세부사항 스타일 */
+        .reservation-details {
+            margin-bottom: 20px;
+        }
+
+        /* 이미지 스타일 */
+        .reservation-image {
+            max-width: 100%; /* 부모 요소의 너비에 맞게 이미지 크기를 조절 */
+            height: auto; /* 이미지의 비율을 유지하면서 크기 조절 */
+            margin-bottom: 20px; /* 이미지와 텍스트 사이에 간격 추가 */
+            border-radius: 8px; /* 이미지의 모서리를 둥글게 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 이미지에 그림자 추가 */
+        }
+
+        /* 각 항목 스타일 */
+        .reservation-item {
+            display: flex; /* 플렉스 박스를 사용하여 라벨과 세부 사항을 수평 정렬 */
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* 라벨 스타일 */
+        .reservation-label {
+            width: 130px; /* 라벨의 고정 너비를 지정하여 일관성 유지 */
+            font-weight: bold;
+            color: #000;
+        }
+
+        /* 상세 정보 스타일 */
+        .reservation-detail {
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* 폼 스타일 */
+        .reservation-form {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        /* 버튼 스타일 */
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* 링크 스타일 */
+        .cancel-link {
+            display: block;
+            text-align: center;
+            color: #777;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .cancel-link:hover {
+            color: #333;
+            text-decoration: underline;
+        }

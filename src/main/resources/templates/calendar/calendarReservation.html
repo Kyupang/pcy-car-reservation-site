@@ -1,70 +1,115 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Car Reservation</title>
-  <link rel="stylesheet" href="../styles.css">
-  <title>Calendar Page</title>
-  <!-- FullCalendar CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet"/>
-  <style>
-        /* FullCalendar에서 예약 불가능한 날짜 스타일링 */
-        .fc-event-reserved {
-            background-color: red;
-            border-color: red;
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="description" content="">
+    <title>Calendar page</title>
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+    <link href="../default.css" rel="stylesheet" type="text/css" media="all">
+    <link href="../fonts.css" rel="stylesheet" type="text/css" media="all">
+    <!--[if IE 6]>
+    <link href="default_ie6.css" rel="stylesheet" type="text/css"/><![endif]-->
+
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet"/>
+    <style>
+        /* 캘린더 전체 너비와 높이 줄이기 */
+        #calendar {
+            max-width: 800px; /* 원하는 너비로 조정 */
+            margin: 0 auto; /* 중앙 정렬 */
+        }
+
+        /* FullCalendar 내부 요소 크기 줄이기 */
+        .fc-toolbar, .fc-daygrid {
+            font-size: 0.85em; /* 폰트 크기 줄이기 */
+        }
+
+        .fc-daygrid-day {
+            padding: 5px; /* 각 날짜 셀의 패딩 줄이기 */
+        }
+
+         .fc-event-car-a {
+            background-color: #FFA07A !important; /* Light Salmon */
+            border-color: #FFA07A !important;
+        }
+
+        .fc-event-car-b {
+            background-color: #20B2AA !important; /* Light Sea Green */
+            border-color: #20B2AA !important;
         }
 
     </style>
 </head>
 <body>
-<header>
-  <div class="logo">
-    <a href="/"><img src="../home-icon.png" alt="Home Icon"></a>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="/reservation/calendar">캘린더</a></li>
-      <li><a href="/post/carImagePostList">촬영 게시판</a></li>
-      <li><a href="/post/wishPostList">건의 게시판</a></li>
-      <li><a href="/reservation/textList">예약 목록</a></li>
-      <li><a href="/managerLogin">관리자 페이지</a></li>
-    </ul>
-  </nav>
-  <div class="profile">
-    <!--        <a href="#"><img src="profile-icon.png" alt="Profile Icon"></a>-->
-  </div>
-</header>
-<h1>예약 확인 캘린더</h1>
+<div id="header-wrapper">
+    <div id="header" class="container">
+        <div id="logo">
+            <a href="/"><img src="../home-icon.png" alt="Home Icon"></a>
+            <h1><a href="/">평촌교회 청년부 차량 예약 시스템</a></h1>
+        </div>
+        <div id="menu">
+            <ul>
+                <li><a href="/reservation/calendar" accesskey="1" title="캘린더">캘린더</a></li>
+                <li><a href="/post/carImagePostList" accesskey="2" title="촬영 게시판">촬영 게시판</a></li>
+                <li><a href="/post/wishPostList" accesskey="3" title="건의 게시판">건의 게시판</a></li>
+                <li><a href="/reservation/textList" accesskey="4" title="예약 목록">예약 목록</a></li>
+                <li><a href="/managerLogin" accesskey="5" title="관리자 페이지">관리자 페이지</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div><br><br></div>
+
 <div id="calendar"></div> <!-- FullCalendar를 표시할 DIV -->
+
+<!--footer-->
+<div><br><br></div>
+<div id="wrapper1">
+    <div id="welcome" class="container">
+    </div>
+</div>
 
 <!-- FullCalendar JS -->
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales/ko.js"></script> <!-- 한국어 로케일 파일 추가 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
+        locale: 'ko',
         initialView: 'dayGridMonth',
         events: `/reservation/getReservationList`,
         eventContent: function(arg) {
             var startTime = formatTime(arg.event.start);
             var endTime = arg.event.end ? formatTime(arg.event.end) : 'N/A';
-            var carName = arg.event.extendedProps.carName; // 차량 이름 가져오기
+            var affiliation = arg.event.extendedProps.affiliation;
 
             return {
                 html: `
                     <div>
-                        <strong>${carName}</strong><br>
+                        <strong>${affiliation}</strong><br>
                         <strong>Start:</strong> ${startTime}<br>
                         <strong>End:</strong> ${endTime}
                     </div>
                 `
             };
         },
-        eventClassNames: function(event) {
-            return event.reserved ? 'fc-event-reserved' : '';
+        eventClassNames: function(arg) {
+            var carName = arg.event.extendedProps.carName; // 차량 이름 가져오기
+            switch(carName) {
+                case '스타리아':
+                    return 'fc-event-car-a';
+                case '스타렉스':
+                    return 'fc-event-car-b';
+                default:
+                    return '';
+            }
         }
     });
     calendar.render();
@@ -80,6 +125,7 @@ function formatTime(date) {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     return hours + ':' + minutes + ' ' + ampm;
 }
+
 </script>
 </body>
 </html>

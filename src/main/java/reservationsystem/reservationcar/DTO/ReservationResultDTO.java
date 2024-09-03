@@ -8,6 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class ReservationResultDTO {
     private String carName;
+    private String affiliation;
     private LocalDateTime start;
     private LocalDateTime end;
 }
