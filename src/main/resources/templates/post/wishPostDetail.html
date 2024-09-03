@@ -1,65 +1,71 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>게시글 상세 보기</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
+  <meta name="keywords" content="">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="description" content="">
+  <title></title>
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+  <link href="/default.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/fonts.css" rel="stylesheet" type="text/css" media="all">
+  <!--[if IE 6]>
+  <link href="default_ie6.css" rel="stylesheet" type="text/css"/><![endif]-->
 </head>
 <body>
-<header>
-  <div class="container-fluid">
-    <div class="d-flex justify-content-between align-items-center p-3 bg-light shadow-sm">
-      <a href="/" class="logo">
-        <img src="../home-icon.png" alt="Home Icon" class="img-fluid" style="width: 40px;">
-      </a>
-      <nav>
-        <ul>
-          <li><a href="/reservation/calendar">캘린더</a></li>
-          <li><a href="/post/carImagePostList">촬영 게시판</a></li>
-          <li><a href="/post/wishPostList">건의 게시판</a></li>
-          <li><a href="/reservation/textList">예약 목록</a></li>
-          <li><a href="/managerLogin">관리자 페이지</a></li>
-        </ul>
-      </nav>
-      <div class="profile">
-        <!-- Profile icon could be added here -->
-      </div>
+
+<div id="header-wrapper">
+  <div id="header" class="container">
+    <div id="logo">
+      <a href="/"><img src="/home-icon.png" alt="Home Icon"></a>
+      <h1><a href="/">평촌교회 청년부 차량 예약 시스템</a></h1>
+    </div>
+    <div id="menu">
+      <ul>
+        <li><a href="/reservation/calendar" accesskey="1" title="캘린더">캘린더</a></li>
+        <li><a href="/post/carImagePostList" accesskey="2" title="촬영 게시판">촬영 게시판</a></li>
+        <li><a href="/post/wishPostList" accesskey="3" title="건의 게시판">건의 게시판</a></li>
+        <li><a href="/reservation/textList" accesskey="4" title="예약 목록">예약 목록</a></li>
+        <li><a href="/managerLogin" accesskey="5" title="관리자 페이지">관리자 페이지</a></li>
+      </ul>
     </div>
   </div>
-</header>
+</div>
 
-<main class="container mt-4">
-  <h1 class="mb-4" th:text="${post.title}">게시글 제목</h1>
+<div><br><br></div>
+<main class="post-detail-container">
+  <h1 class="post-detail-title" th:text="${post.title}">게시글 제목</h1>
 
-  <div class="mb-3">
-    <h5>작성자:</h5>
-    <p th:text="${post.author}">작성자 이름</p>
+  <div class="post-detail-author">
+    <h5 class="post-detail-author-label">작성자:</h5>
+    <p class="post-detail-author-name" th:text="${post.author}">작성자 이름</p>
   </div>
 
-  <div class="mb-3">
-    <h5>내용:</h5>
-    <p th:text="${post.content}">게시글 내용</p>
+  <div class="post-detail-content">
+    <h5 class="post-detail-content-label">내용:</h5>
+    <p class="post-detail-content-text" th:text="${post.content}">게시글 내용</p>
   </div>
 
-  <div class="mb-3">
-    <h5>이미지:</h5>
+  <div class="post-detail-images">
+    <h5 class="post-detail-images-label">이미지:</h5>
     <div th:if="${post.imageUrls != null}">
       <div th:each="imageUrl : ${post.imageUrls}">
-        <img th:src="@{${imageUrl}}" class="img-fluid mb-2" alt="Post Image" style="max-width: 100%;">
+        <img th:src="@{${imageUrl}}" class="post-detail-image" alt="Post Image">
       </div>
     </div>
   </div>
 
-  <div class="mt-4">
-    <a href="/post/wishPostList" class="btn btn-secondary">목록으로 돌아가기</a>
+  <div class="post-detail-back">
+    <a href="/post/wishPostList" class="post-detail-back-btn">목록으로 돌아가기</a>
   </div>
 </main>
+<!--footer-->
+<div><br><br></div>
+<div id="wrapper1">
+  <div id="welcome" class="container">
+  </div>
+</div>
 
-<!-- Bootstrap JS and dependencies -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </body>
 </html>

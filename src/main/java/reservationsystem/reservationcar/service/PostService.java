@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,6 +41,7 @@ public class PostService {
         post.setContent(postDTO.getContent());
         post.setAuthor(postDTO.getAuthor());
         post.setBoardType(boardType);
+        post.setTimestamp(postDTO.getTimestamp());
 
         // Save post
         Post savedPost = postRepository.save(post);
@@ -89,11 +93,10 @@ public class PostService {
                 .orElse(null);
     }
 
-    public List<PostDTO> getAllPosts(String boardType) {
-        List<Post> posts = postRepository.findByBoardType(boardType);
-        return posts.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+    public Page<PostDTO> getAllPosts(String boardType, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Post> postPage = postRepository.findByBoardType(boardType, pageable);
+        return postPage.map(this::convertToDTO);
     }
 
     private PostDTO convertToDTO(Post post) {
@@ -102,6 +105,7 @@ public class PostService {
         postDTO.setTitle(post.getTitle());
         postDTO.setContent(post.getContent());
         postDTO.setAuthor(post.getAuthor());
+        postDTO.setTimestamp(post.getTimestamp());
         postDTO.setImageUrls(post.getImages().stream()
                 .map(Image::getUrl)
                 .collect(Collectors.toList()));

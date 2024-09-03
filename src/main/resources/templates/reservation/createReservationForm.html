@@ -1,75 +1,130 @@
 <!DOCTYPE HTML>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Reservation</title>
-    <link rel="stylesheet" href="../styles.css">
-    <title>createForm</title>
+    <meta name="keywords" content="">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="description" content="">
+    <title>Create Form</title>
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+    <link href="../default.css" rel="stylesheet" type="text/css" media="all">
+    <link href="../fonts.css" rel="stylesheet" type="text/css" media="all">
+    <!--[if IE 6]>
+    <link href="default_ie6.css" rel="stylesheet" type="text/css"/><![endif]-->
+
+
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
     <!-- FullCalendar CSS -->
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet"/>
     <style>
-        /* FullCalendar에서 예약 불가능한 날짜 스타일링 */
-        .fc-event-reserved {
-            background-color: red;
-            border-color: red;
+        /* 캘린더 전체 너비와 높이 줄이기 */
+        #calendar {
+            max-width: 800px; /* 원하는 너비로 조정 */
+            margin: 0 auto; /* 중앙 정렬 */
         }
+
+        /* FullCalendar 내부 요소 크기 줄이기 */
+        .fc-toolbar, .fc-daygrid {
+            font-size: 0.85em; /* 폰트 크기 줄이기 */
+        }
+
+        .fc-daygrid-day {
+            padding: 5px; /* 각 날짜 셀의 패딩 줄이기 */
+        }
+
 
     </style>
 </head>
 <body>
-<header>
-    <div class="logo">
-        <a href="/"><img src="../home-icon.png" alt="Home Icon"></a>
+<div id="header-wrapper">
+    <div id="header" class="container">
+        <div id="logo">
+            <a href="/"><img src="../home-icon.png" alt="Home Icon"></a>
+            <h1><a href="/">평촌교회 청년부 차량 예약 시스템</a></h1>
+        </div>
+        <div id="menu">
+            <ul>
+                <li><a href="/reservation/calendar" accesskey="1" title="캘린더">캘린더</a></li>
+                <li><a href="/post/carImagePostList" accesskey="2" title="촬영 게시판">촬영 게시판</a></li>
+                <li><a href="/post/wishPostList" accesskey="3" title="건의 게시판">건의 게시판</a></li>
+                <li><a href="/reservation/textList" accesskey="4" title="예약 목록">예약 목록</a></li>
+                <li><a href="/managerLogin" accesskey="5" title="관리자 페이지">관리자 페이지</a></li>
+            </ul>
+        </div>
     </div>
-    <nav>
-        <ul>
-            <li><a href="/reservation/calendar">캘린더</a></li>
-            <li><a href="/post/carImagePostList">촬영 게시판</a></li>
-            <li><a href="/post/wishPostList">건의 게시판</a></li>
-            <li><a href="/reservation/textList">예약 목록</a></li>
-            <li><a href="/managerLogin">관리자 페이지</a></li>
-        </ul>
-    </nav>
-    <div class="profile">
-        <!--        <a href="#"><img src="profile-icon.png" alt="Profile Icon"></a>-->
+</div>
+
+<div><br><br></div>
+
+<form id="reservationForm" class="custom-form" role="form">
+    <div class="form-wrapper">
+        <div class="form-container">
+            <input type="hidden" name="carId" id="carId" th:value="${carId}"/>
+
+            <div class="form-group">
+                <label for="name">신청자 이름</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="이름을 입력하세요"/>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber">핸드폰 번호</label>
+                <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" placeholder="(-)없이 번호를 입력하세요"/>
+            </div>
+
+            <div class="form-group">
+                <label for="affiliation">신청 부서(팀)</label>
+                <input type="text" name="affiliation" id="affiliation" class="form-control" placeholder="부서(팀)을 입력하세요"/>
+            </div>
+
+            <div class="form-group">
+                <label for="purpose">목적지 및 사용 목적</label>
+                <input type="text" name="purpose" id="purpose" class="form-control" placeholder="목적지 : 사용 목적 형식으로 입력하세요"/>
+            </div>
+
+            <div class="form-group">
+                <label for="numberOfPassengers">탑승 인원</label>
+                <input type="text" name="numberOfPassengers" id="numberOfPassengers" class="form-control" placeholder="탑승 인원을 입력하세요"/>
+            </div>
+
+            <div class="form-group">
+                <label for="startTime">차량 이용 시작 시간</label>
+                <input type="text" id="startTime" name="startTime" class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <label for="endTime">차량 이용 완료 시간</label>
+                <input type="text" id="endTime" name="endTime" class="form-control"/>
+            </div>
+
+            <!-- 버튼을 폼의 아래쪽 가운데에 배치할 영역 -->
+            <div class="form-button-container">
+                <button type="submit" class="submit">제출</button>
+            </div>
+        </div>
+
+        <div id="calendar"></div> <!-- FullCalendar를 표시할 DIV -->
     </div>
-</header>
-<form id="reservationForm" role="form">
-    <input type="hidden" name="carId" id="carId" th:value="${carId}"/>
-
-    <div class="form-group">
-        <label for="name">이름</label>
-        <input type="text" name="name" id="name" class="form-control" placeholder="이름을 입력하세요"/>
-    </div>
-
-    <div class="form-group">
-        <label for="phoneNumber">번호</label>
-        <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" placeholder="번호를 입력하세요"/>
-    </div>
-
-    <div class="form-group">
-        <label for="affiliation">소속</label>
-        <input type="text" name="affiliation" id="affiliation" class="form-control" placeholder="소속을 입력하세요"/>
-    </div>
-
-    <div id="calendar"></div> <!-- FullCalendar를 표시할 DIV -->
-
-    <div class="form-group">
-        <label for="startTime">예약 시작 시간</label>
-        <input type="datetime-local" id="startTime" name="startTime" class="form-control"/>
-    </div>
-
-    <div class="form-group">
-        <label for="endTime">예약 끝나는 시간</label>
-        <input type="datetime-local" id="endTime" name="endTime" class="form-control"/>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<div><br><br></div>
+<div><br><br></div>
+<div><br><br></div>
+<!--footer-->
+<div><br><br></div>
+<div id="wrapper1">
+    <div id="welcome" class="container">
+    </div>
+</div>
+
+<!-- Include Flatpickr JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <!-- FullCalendar JS -->
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales/ko.js"></script> <!-- 한국어 로케일 파일 추가 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -77,17 +132,18 @@ document.addEventListener('DOMContentLoaded', function() {
     var carId = document.getElementById('carId').value;
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
+        locale: 'ko',
         initialView: 'dayGridMonth',
         events: `/reservation/getReservationListById?carId=${carId}`, // 차량 ID에 따른 예약 리스트를 가져옴
         eventContent: function(arg) {
             var startTime = formatTime(arg.event.start);
             var endTime = arg.event.end ? formatTime(arg.event.end) : 'N/A';
-            var carName = arg.event.extendedProps.carName; // 차량 이름 가져오기
+            var affiliation = arg.event.extendedProps.affiliation;
 
             return {
                 html: `
                     <div>
-                        <strong>${carName}</strong><br>
+                        <strong>${affiliation}</strong><br>
                         <strong>Start:</strong> ${startTime}<br>
                         <strong>End:</strong> ${endTime}
                     </div>
@@ -117,6 +173,26 @@ function formatTime(date) {
     return hours + ':' + minutes + ' ' + ampm;
 }
 
+function initializeFlatpickr(selector) {
+    flatpickr(selector, {
+        enableTime: true,
+        dateFormat: "Y-m-d\\TH:i:S", // ISO 8601 형식으로 변경
+        time_24hr: true,
+        minuteIncrement: 30,
+        defaultDate: new Date(),
+        onReady: function(selectedDates, dateStr, instance) {
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getFullYear()}-${('0' + (currentDate.getMonth() + 1)).slice(-2)}-${('0' + currentDate.getDate()).slice(-2)}T${('0' + currentDate.getHours()).slice(-2)}:00:00`;
+            instance.setDate(formattedDate);
+        }
+    });
+}
+
+// Flatpickr 초기화
+initializeFlatpickr('#startTime');
+initializeFlatpickr('#endTime');
+
+
 $('#reservationForm').on('submit', function(event) {
     event.preventDefault();
 
@@ -124,6 +200,8 @@ $('#reservationForm').on('submit', function(event) {
     var name = $('#name').val().trim();
     var phoneNumber = $('#phoneNumber').val().trim();
     var affiliation = $('#affiliation').val().trim();
+    var purpose = $('#purpose').val();
+    var numberOfPassengers = $('#numberOfPassengers').val();
     var startTime = $('#startTime').val();
     var endTime = $('#endTime').val();
 
@@ -142,6 +220,18 @@ $('#reservationForm').on('submit', function(event) {
     if (!affiliation) {
         alert('소속을 입력하세요.');
         $('#affiliation').focus();
+        return;
+    }
+
+    if (!purpose) {
+        alert('목적지 및 사용 목적을 입력하세요.');
+        $('#purpose').focus();
+        return;
+    }
+
+    if (!numberOfPassengers) {
+        alert('탑승 인원을 입력하세요.');
+        $('#numberOfPassengers').focus();
         return;
     }
 
@@ -169,14 +259,17 @@ $('#reservationForm').on('submit', function(event) {
                 var name = $('#name').val();
                 var phoneNumber = $('#phoneNumber').val();
                 var affiliation = $('#affiliation').val();
+                var purpose = $('#purpose').val();
+                var numberOfPassengers = $('#numberOfPassengers').val();
                 var startTime = $('#startTime').val();
                 var endTime = $('#endTime').val();
 
-                window.location.href = `/reservation/confirm?carId=${carId}&name=${name}&phoneNumber=${phoneNumber}&affiliation=${affiliation}&startTime=${startTime}&endTime=${endTime}`;
+                window.location.href = `/reservation/confirm?carId=${carId}&name=${name}&phoneNumber=${phoneNumber}&affiliation=${affiliation}&purpose=${purpose}&numberOfPassengers=${numberOfPassengers}&startTime=${startTime}&endTime=${endTime}`;
             } else {
                 alert(response.errorMessage);
             }
         }
+
     });
 });
 

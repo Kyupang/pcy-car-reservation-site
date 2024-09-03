@@ -1,56 +1,73 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>차량 등록</title>
-    <link rel="stylesheet" href="../styles.css">
+    <meta name="keywords" content="">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="description" content="">
+    <title></title>
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+    <link href="../default.css" rel="stylesheet" type="text/css" media="all">
+    <link href="../fonts.css" rel="stylesheet" type="text/css" media="all">
+    <!--[if IE 6]>
+    <link href="default_ie6.css" rel="stylesheet" type="text/css"/><![endif]-->
 </head>
-
 <body>
-<header>
-    <div class="logo">
-        <a href="/"><img src="../home-icon.png" alt="Home Icon"></a>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="/reservation/calendar">캘린더</a></li>
-            <li><a href="/post/carImagePostList">촬영 게시판</a></li>
-            <li><a href="/post/wishPostList">건의 게시판</a></li>
-            <li><a href="/reservation/textList">예약 목록</a></li>
-            <li><a href="/managerLogin">관리자 페이지</a></li>
-        </ul>
-    </nav>
-    <div class="profile">
-        <!-- <a href="#"><img src="profile-icon.png" alt="Profile Icon"></a> -->
-    </div>
-</header>
-<h1>차량 등록</h1>
 
-<form id="car-form" role="form" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="car-name">차량 이름:</label>
-        <input type="text" id="car-name" name="name" class="form-control" placeholder="이름을 입력하세요"/>
-        <p id="car-name-error" class="error-message"></p>
+<div id="header-wrapper">
+    <div id="header" class="container">
+        <div id="logo">
+            <a href="/"><img src="../home-icon.png" alt="Home Icon"></a>
+            <h1><a href="/">평촌교회 청년부 차량 예약 시스템</a></h1>
+        </div>
+        <div id="menu">
+            <ul>
+                <li><a href="/reservation/calendar" accesskey="1" title="캘린더">캘린더</a></li>
+                <li><a href="/post/carImagePostList" accesskey="2" title="촬영 게시판">촬영 게시판</a></li>
+                <li><a href="/post/wishPostList" accesskey="3" title="건의 게시판">건의 게시판</a></li>
+                <li><a href="/reservation/textList" accesskey="4" title="예약 목록">예약 목록</a></li>
+                <li><a href="/managerLogin" accesskey="5" title="관리자 페이지">관리자 페이지</a></li>
+            </ul>
+        </div>
     </div>
+</div>
 
-    <div class="form-group">
-        <label for="car-plate">차량 번호판:</label>
-        <input type="text" id="car-plate" name="carNumber" class="form-control" placeholder="번호판을 입력하세요"/>
-        <p id="car-plate-error" class="error-message"></p>
-    </div>
+<div><br><br></div>
 
-    <div class="form-group">
-        <label for="car-image-upload">차량 이미지 업로드:</label>
-        <input type="file" id="car-image-upload" class="form-control" accept="image/*"/>
-    </div>
-    <div class="car-image">
-        <img id="car-image" src="default-image.png" alt="Vehicle image" style="max-width: 200px;"/>
-    </div>
+<div class="car-form-container">
+    <form id="car-form" role="form" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="car-name">차량 이름:</label>
+            <input type="text" id="car-name" name="name" class="form-control" placeholder="이름을 입력하세요"/>
+            <p id="car-name-error" class="error-message"></p>
+        </div>
 
-    <button type="submit">등록</button>
-</form>
-<div id="response-message"></div>
+        <div class="form-group">
+            <label for="car-plate">차량 번호판:</label>
+            <input type="text" id="car-plate" name="carNumber" class="form-control" placeholder="번호판을 입력하세요"/>
+            <p id="car-plate-error" class="error-message"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="car-image-upload">차량 이미지 업로드:</label>
+            <input type="file" id="car-image-upload" class="form-control" accept="image/*"/>
+        </div>
+
+        <div class="car-image">
+            <img id="car-image" src="default-image.png" alt="Vehicle image"/>
+        </div>
+
+        <button type="submit" class="submit">등록</button>
+    </form>
+    <div id="response-message" class="response-message"></div>
+</div>
+<!--footer-->
+<div><br><br></div>
+<div id="wrapper1">
+    <div id="welcome" class="container">
+    </div>
+</div>
 
 <script>
     document.getElementById('car-form').addEventListener('submit', function(event) {
