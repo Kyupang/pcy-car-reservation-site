@@ -19,3 +19,7 @@ logging:
 upload:
   path: C:/Users/KimKyuHwan/Desktop/upload
 
+sms:
+  api:
+    key: NCSUOSOZHFQ9DNVW
+    secret: PY1WROKIFUZVF7CK1DLLZFZYCUQBBSYY
