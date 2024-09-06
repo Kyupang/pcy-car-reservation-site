@@ -60,16 +60,48 @@
 
         <button type="submit" class="submit">등록</button>
     </form>
+
+<!--    <form id="smstest"  method="post">-->
+<!--        <button>전송 테스트</button>-->
+<!--    </form>-->
+
     <div id="response-message" class="response-message"></div>
 </div>
 <!--footer-->
 <div><br><br></div>
 <div id="wrapper1">
-    <div id="welcome" class="container">
+    <div id="welcome">
+        <h3>부총무: 010-4527-9904 안수성</h3>
+        <h3>차량 번호: 284다 8173</h3>
     </div>
 </div>
 
 <script>
+    document.getElementById('smstest').addEventListener('submit', async function (event) {
+            event.preventDefault();  // 폼의 기본 제출 동작을 막음
+
+            try {
+                const response = await fetch('/send-one', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+
+                if (response.ok) {
+                    const jsonResponse = await response.json();
+                    console.log('성공:', jsonResponse);
+                    alert('메시지가 성공적으로 전송되었습니다!');
+                } else {
+                    console.error('실패:', response.statusText);
+                    alert('메시지 전송에 실패했습니다.');
+                }
+            } catch (error) {
+                console.error('오류 발생:', error);
+                alert('오류가 발생했습니다.');
+            }
+        });
+
     document.getElementById('car-form').addEventListener('submit', function(event) {
         event.preventDefault();
 

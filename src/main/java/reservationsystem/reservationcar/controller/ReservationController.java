@@ -29,13 +29,17 @@ import reservationsystem.reservationcar.DTO.ReservationRequestDTO;
 import reservationsystem.reservationcar.DTO.ReservationResultDTO;
 import reservationsystem.reservationcar.domain.Reservation;
 import reservationsystem.reservationcar.domain.ReservationStatus;
+import reservationsystem.reservationcar.repository.ReservationRepository;
 import reservationsystem.reservationcar.service.ReservationService;
+import reservationsystem.reservationcar.service.SmsService;
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 public class ReservationController {
     private final ReservationService reservationService;
+    private final ReservationRepository reservationRepository;
+    private final SmsService smsService;
 
     // 맵핑 매서드
     @GetMapping("/managerLogin")
@@ -86,6 +90,7 @@ public class ReservationController {
     public String completeReservation(@ModelAttribute ReservationRequestDTO requestDTO,
                                       @RequestParam("carId") Long carId) {
         reservationService.createReservation(carId, requestDTO);
+        smsService.sendManager(requestDTO.getPhoneNumber(), requestDTO.getName());
         return "redirect:/";
     }
 
@@ -204,6 +209,8 @@ public class ReservationController {
     public String approveReservation(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
             reservationService.approveReservation(id);
+            Reservation reservation = reservationRepository.findOne(id);
+            smsService.sendRegister(reservation.getPhoneNumber());
             redirectAttributes.addFlashAttribute("message", "Reservation approved successfully");
         } catch (IllegalStateException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());

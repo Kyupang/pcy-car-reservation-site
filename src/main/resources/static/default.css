@@ -19,7 +19,7 @@
 		height: auto;
 	}
 	
-	h1, h2, h3
+	h1, h2
 	{
 		margin: 0;
 		padding: 0;
@@ -61,145 +61,86 @@
 		margin: 0px auto;
 		width: 1200px;
 	}
-
-/* 반응형 스타일 */
-
-/* 모바일 장치 (600px 이하) */
-@media screen and (max-width: 600px) {
-    #welcome, #newsletter, #copyright {
-        padding: 2em 1em;
+/*반응형 스타일*/
+/* 소형 화면 (모바일) */
+@media (max-width: 768px) {
+    .container {
+        width: 100% !important;
+        padding: 0 1rem !important;
     }
 
-    #newsletter .content, #post-form-container, .post-detail-container {
-        width: 100%;
-        padding: 1em;
-        box-sizing: border-box;
+    .login-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        padding: 1rem !important;
     }
 
-    .column1, .column2, .column3, .column4 {
-        width: 100%;
-        float: none;
-        margin-right: 0;
-        margin-bottom: 24px;
+    .car-form-container,
+    .post-form-container,
+    .post-detail-container {
+        width: 100% !important;
+        padding: 1rem !important;
     }
 
-    .pagination {
-        flex-direction: column;
+    .menu-list {
+        flex-direction: column !important;
+        align-items: center !important;
     }
 
-    .pagination a, .pagination span {
-        margin: 5px 0;
+    .image img,
+    .car-image img {
+        width: 50% !important;
+        height: 50% !important;
     }
 
-    #reservation-table {
-        width: 100%;
-        font-size: 14px;
+    .button {
+        width: 100% !important;
+        text-align: center !important;
+        margin-left: 0 !important;
     }
 
-    .btn {
-        padding: 10px;
-        font-size: 14px;
+    #reserve-button {
+        width: 100% !important;
     }
 
-    .btn-primary {
-        padding: 8px 16px;
+
+    .pagination a,
+    .pagination span {
+        margin: 5px 0 !important;
     }
 
-    .board-table {
-        font-size: 12px;
-    }
-}
+     #header-wrapper {
 
-/* 태블릿 (601px ~ 1024px) */
-@media screen and (min-width: 601px) and (max-width: 1024px) {
-    #welcome, #newsletter, #copyright {
-        padding: 3em 2em;
-    }
+     }
 
-    #newsletter .content, #post-form-container, .post-detail-container {
-        width: 90%;
-        padding: 1.5em;
-        box-sizing: border-box;
-    }
+     #logo h1 {
+         font-size: 2.5em !important;
+     }
 
-    .column1, .column2, .column3, .column4 {
-        width: 45%;
-        float: left;
-        margin-right: 24px;
-    }
+     #logo img {
+         width: 50px !important;
+     }
 
-    .pagination {
-        flex-direction: row;
-    }
+     #welcome {
+         /*padding: 1.5em 1em !important;*/
+         text-align: center !important;
+         width: 100% !important;
+     }
 
-    .pagination a, .pagination span {
-        margin: 0 5px;
-    }
+     #welcome h2 {
+         font-size: 1.5em !important;
+     }
 
-    #reservation-table {
-        width: 100%;
-        font-size: 15px;
-    }
+     #welcome p {
+         font-size: 1em !important;
+         line-height: 1.5 !important;
+     }
 
-    .btn {
-        padding: 12px 24px;
-        font-size: 15px;
-    }
-
-    .btn-primary {
-        padding: 10px 20px;
-    }
-
-    .board-table {
-        font-size: 14px;
+    .flex-container {
+        display: block;
     }
 }
-
-/* 데스크탑 (1025px 이상) */
-@media screen and (min-width: 1025px) {
-    #welcome, #newsletter, #copyright {
-        padding: 4em 4em;
-    }
-
-    #newsletter .content, #post-form-container, .post-detail-container {
-        width: 80%;
-        padding: 2em;
-        box-sizing: border-box;
-    }
-
-    .column1, .column2, .column3, .column4 {
-        width: 23%;
-        float: left;
-        margin-right: 24px;
-    }
-
-    .pagination {
-        flex-direction: row;
-    }
-
-    .pagination a, .pagination span {
-        margin: 0 10px;
-    }
-
-    #reservation-table {
-        width: 75%;
-        font-size: 16px;
-    }
-
-    .btn {
-        padding: 14px 28px;
-        font-size: 16px;
-    }
-
-    .btn-primary {
-        padding: 12px 24px;
-    }
-
-    .board-table {
-        font-size: 16px;
-    }
-}
-
 	/* login*/
 .login-container {
             width: 100%;
@@ -229,7 +170,7 @@
         }
 
         .login-container input[type="password"]:focus {
-            border-color: #007bff;
+            border-color: #585858;
             outline: none;
         }
 
@@ -238,7 +179,7 @@
             padding: 0.75rem;
             font-size: 1rem;
             color: #fff;
-            background-color: #007bff;
+            background-color: #585858;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -246,7 +187,7 @@
         }
 
         .login-container button:hover {
-            background-color: #0056b3;
+            background-color: #9e9d9d;
         }
 
 
@@ -286,7 +227,7 @@
 
                 .form-group input[type="text"]:focus,
                 .form-group input[type="file"]:focus {
-                    border-color: #007bff;
+                    border-color: #585858;
                     outline: none;
                 }
 
@@ -299,10 +240,11 @@
                 .car-image {
                     margin: 1rem 0;
                     text-align: center;
+
                 }
 
                 .car-image img {
-                    max-width: 100%;
+                    max-width: 50%;
                     height: auto;
                     border: 1px solid #ddd;
                     border-radius: 4px;
@@ -314,7 +256,7 @@
                     padding: 0.75rem 1.5rem;
                     font-size: 1rem;
                     color: #fff;
-                    background-color: #8dcb89;
+                    background-color: #585858;
                     border: none;
                     border-radius: 4px;
                     cursor: pointer;
@@ -322,7 +264,7 @@
                 }
 
                 .submit:hover {
-                    background-color: #0056b3;
+                    background-color: #9e9d9d;
                 }
 
                 .response-message {
@@ -331,129 +273,73 @@
                     color: #333;
                 }
 
+.flex-container {
+    display: flex;
+    justify-content: space-between; /* 좌우로 배치 */
+    gap: 20px; /* 요소 간 간격 조정 (옵션) */
+    padding: 20px; /* 부모 컨테이너에 여백 추가 (옵션) */
+}
 
-		.custom-form {
+/* 폼과 캘린더의 크기를 조절 */
+#calendar {
+    flex: 3; /* 캘린더가 폼의 3배 크기 */
+}
+
+#reservationForm {
+    flex: 1; /* 폼이 캘린더의 1/3 크기 */
+}
+
+ .custom-form {
             display: flex;
-            flex-direction: column; /* 가로 방향으로 배치 */
-            justify-content: space-between; /* 폼과 캘린더 사이의 공간을 분배 */
-            align-items: flex-start; /* 폼과 캘린더의 수직 정렬을 상단으로 맞춤 */
-            flex-wrap: wrap; /* 화면 크기에 따라 자동으로 줄 바꿈 */
-            height: 100vh; /* 전체 화면 높이 */
-            padding: 1em; /* 폼 주변의 여백 */
-            box-sizing: border-box; /* 패딩과 테두리를 포함하여 요소의 너비와 높이를 계산 */
-            margin-left: 20%; /* 자동으로 왼쪽 여백을 추가 */
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            width: 100%;
+            max-width: 800px;
         }
 
-        .custom-form .form-wrapper {
-            display: flex;
-            flex-direction: row; /* 입력 폼과 캘린더를 가로 방향으로 배치 */
-            width: 85%; /* 전체 너비를 차지하도록 설정 */
-            gap: 1em; /* 입력 폼과 캘린더 사이의 간격 */
+        .custom-form .form-group {
+            width: 100%;
+            margin-bottom: 15px;
         }
 
-        .custom-form .form-container {
-            flex: 1; /* 입력 폼이 가용 공간을 차지하도록 설정 */
-            display: flex;
-            flex-direction: column; /* 입력 폼 내부 요소를 수직으로 배치 */
-            gap: 1em; /* 입력 폼 요소 간의 간격 */
+        .custom-form .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
 
-        .custom-form #calendar {
-            flex: 3; /* 캘린더가 가용 공간을 차지하도록 설정 */
-            min-width: 600px; /* 캘린더의 최소 너비를 설정 */
+        .custom-form .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
 
         .custom-form .form-button-container {
-            margin-top: auto; /* 폼 요소가 위쪽으로 붙게 함 */
-            text-align: center; /* 버튼을 가운데로 정렬 */
+            text-align: center;
+            margin-top: 20px;
         }
 
-        /* 버튼 스타일 */
-        .custom-form .submit {
-            background: #8DCB89;
-            border-radius: 8px;
-            line-height: 1.5em;
-            font-size: 1.3em;
-            color: #fff;
-            padding: 0.75em 1.5em;
+        .custom-form .form-button-container button {
+            padding: 10px 20px;
             border: none;
+            border-radius: 4px;
+            background: #585858;
+            color: #fff;
+            font-size: 16px;
             cursor: pointer;
-            display: inline-block; /* 버튼을 인라인 블록 요소로 설정 */
-            margin: 0 auto; /* 버튼을 가운데 정렬 */
+            transition: background 0.3s ease;
         }
 
-        .custom-form label {
-            display: block;
-            margin-bottom: 0.5em;
+        .custom-form .form-button-container button:hover {
+            background: #585858;
         }
-
-        .custom-form input.text,
-        .custom-form select,
-        .custom-form textarea {
-            position: relative;
-            -webkit-appearance: none;
-            display: block;
-            border: 0;
-            background: #fff;
-            background: rgba(255,255,255,0.75);
-            width: 100%;
-            border-radius: 0.50em;
-            margin: 1em 0em;
-            padding: 1.50em 1em;
-            box-shadow: inset 0 0.1em 0.1em 0 rgba(0,0,0,0.05);
-            border: solid 1px rgba(0,0,0,0.15);
-            -moz-transition: all 0.35s ease-in-out;
-            -webkit-transition: all 0.35s ease-in-out;
-            -o-transition: all 0.35s ease-in-out;
-            -ms-transition: all 0.35s ease-in-out;
-            transition: all 0.35s ease-in-out;
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 1em;
-            outline: none;
-        }
-
-        .custom-form input.text:hover,
-        .custom-form select:hover,
-        .custom-form textarea:hover {
-            /* 호버 상태 스타일을 추가할 수 있습니다 */
-        }
-
-        .custom-form input.text:focus,
-        .custom-form select:focus,
-        .custom-form textarea:focus {
-            box-shadow: 0 0 2px 1px #E0E0E0;
-            background: #fff;
-        }
-
-        .custom-form textarea {
-            min-height: 12em;
-        }
-
-        .custom-form .formerize-placeholder {
-            color: #555 !important;
-        }
-
-        .custom-form ::-webkit-input-placeholder {
-            color: #555 !important;
-        }
-
-        .custom-form :-moz-placeholder {
-            color: #555 !important;
-        }
-
-        .custom-form ::-moz-placeholder {
-            color: #555 !important;
-        }
-
-        .custom-form :-ms-input-placeholder {
-            color: #555 !important;
-        }
-
-        .custom-form ::-moz-focus-inner {
-            border: 0;
-        }
-
-
 
 
 /*car image style*/
@@ -485,7 +371,7 @@
 
 #reserve-button {
     display: inline-block;
-    background: #8DCB89;
+    background: #585858;
     border-radius: 8px;
     padding: 1em 2em;
     font-size: 1.2em;
@@ -565,13 +451,13 @@
 
     .menu-list a {
         text-decoration: none; /* Remove underline from links */
-        color: #007bff; /* Link color */
+        color: #585858; /* Link color */
         font-size: 16px; /* Font size */
         font-weight: 500; /* Medium font weight */
     }
 
     .menu-list a:hover {
-        color: #0056b3; /* Darker color on hover */
+        color: #9e9d9d; /* Darker color on hover */
     }
 
     .menu-list span {
@@ -626,48 +512,6 @@
 	
 
 /*********************************************************************************/
-/* Button Style                                                                  */
-/*********************************************************************************/
-
-	/*.button
-	{
-		display: inline-block;
-		margin-top: 2em;
-		padding: 1em 2em 1em 2em;
-		background: #8DCB89;
-		border-radius: 8px;
-		letter-spacing: 0.20em;
-		line-height: 1.8em;
-		text-decoration: none;
-		text-transform: uppercase;
-		font-weight: 400;
-		font-size: 1.2em;
-		color: #FFF;
-	}
-
-	.button:before
-	{
-		display: inline-block;
-		background: #8DCB89;
-		margin-right: 1em;
-		width: 40px;
-		height: 40px;
-		line-height: 40px;
-		border-radius: 20px;
-		text-align: center;
-		color: #272925;
-	}
-
-	.button-small
-	{
-		padding: 0.9em 2em;
-		background: #8DCB89;
-		border-radius: 5px;
-		line-height: 1.8em;
-		font-size: 1em;
-	}
-		*/
-/*********************************************************************************/
 /* Heading Titles                                                                */
 /*********************************************************************************/
 
@@ -697,9 +541,9 @@
 
 	#header-wrapper
 	{
-		overflow: hidden;
-		padding: 5em 0em;
-		background: #8DCB89;
+
+		/*padding: 5em 0em;*/
+		background: #585858;
 	}
 
 	#header
@@ -806,6 +650,9 @@
 
 	#wrapper1
 	{
+        position: relative;
+        bottom: 0;
+        width: 100%;
 		background: #242424;
 	}
 
@@ -835,14 +682,16 @@
 	#welcome
 	{
 		overflow: hidden;
-		padding: 4em 0em;
-		text-align: center;
-		color: rgba(255,255,255,0.3);
+		padding: 3em 0em;
+		padding-left: 20px
+		text-align: left;
+		color: rgba(255,255,255,0.9);
+		margin-left: 20px
 	}
 	
 	#welcome .content
 	{
-		padding: 0em 4em;
+
 	}
 	
 	
@@ -1029,7 +878,7 @@
 /* 버튼 스타일 */
 #reservation-table button {
   background-color: #ff4d4d;
-  color: white;
+  color: black;
   border: none;
   padding: 8px 12px;
   border-radius: 4px;
@@ -1069,7 +918,7 @@
 
     /* 현재 페이지 */
     .pagination span {
-        background-color: #8DCB89;
+        background-color: #585858;
         color: white;
         font-weight: bold;
     }
@@ -1090,7 +939,7 @@
     }
 
     /* 모바일 친화적인 디자인 */
-    @media screen and (max-width: 600px) {
+    /*@media screen and (max-width: 600px) {
         .pagination {
             flex-direction: column;
         }
@@ -1098,7 +947,7 @@
         .pagination span {
             margin: 5px 0;
         }
-    }
+    }*/
 
     /* post */
 
@@ -1333,7 +1182,7 @@
           padding: 0.75rem 1.5rem;
           font-size: 1rem;
           color: #fff;
-          background-color: #007bff;
+          background-color: #585858;
           border: none;
           border-radius: 4px;
           cursor: pointer;
@@ -1342,7 +1191,7 @@
         }
 
         .post-form-submit-btn:hover {
-          background-color: #0056b3;
+          background-color: #9e9d9d;
         }
 
         .post-form-file {
@@ -1485,13 +1334,13 @@
         }
 
         .btn-primary {
-            background-color: #007bff;
+            background-color: #585858;
             color: #fff;
             transition: background-color 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: #0056b3;
+            background-color: #9e9d9d;
         }
 
         /* 링크 스타일 */
