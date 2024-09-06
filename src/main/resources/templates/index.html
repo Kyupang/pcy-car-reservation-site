@@ -1,104 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>Car Reservation</title>-->
-<!--    <link rel="stylesheet" href="default.css">-->
-<!--</head>-->
-
-<!--<body>-->
-<!--<header>-->
-<!--    <div class="logo">-->
-<!--        <a href="/"><img src="home-icon.png" alt="Home Icon"></a>-->
-<!--    </div>-->
-<!--    <nav>-->
-<!--        <ul>-->
-<!--            <li><a href="/reservation/calendar">캘린더</a></li>-->
-<!--            <li><a href="/post/carImagePostList">촬영 게시판</a></li>-->
-<!--            <li><a href="/post/wishPostList">건의 게시판</a></li>-->
-<!--            <li><a href="/reservation/textList">예약 목록</a></li>-->
-<!--            <li><a href="/managerLogin">관리자 페이지</a></li>-->
-<!--        </ul>-->
-<!--    </nav>-->
-<!--    <div class="profile">-->
-<!--        &lt;!&ndash;        <a href="#"><img src="profile-icon.png" alt="Profile Icon"></a>&ndash;&gt;-->
-<!--    </div>-->
-<!--</header>-->
-<!--<div class="car-image">-->
-<!--    <img id="car-image" src="default-image.png" alt="차량 이미지">-->
-<!--</div>-->
-<!--<div class="car-selection">-->
-<!--    <label for="car-select">차량 목록</label>-->
-<!--    <select id="car-select">-->
-<!--        &lt;!&ndash; 차량 목록이 여기에 동적으로 추가됩니다. &ndash;&gt;-->
-<!--    </select>-->
-<!--</div>-->
-
-<!--<div class = "button">-->
-<!--    <button id="reserve-button">예약페이지로 이동</button>-->
-<!--</div>-->
-
-<!--<script>-->
-<!--document.addEventListener('DOMContentLoaded', function() {-->
-<!--    const carSelect = document.getElementById('car-select');-->
-<!--    const carImage = document.getElementById('car-image');-->
-<!--    const reserveButton = document.getElementById('reserve-button');-->
-
-<!--    fetch('/car/getCarList')-->
-<!--        .then(response => response.json())-->
-<!--        .then(data => {-->
-<!--            data.forEach(car => {-->
-<!--                const option = document.createElement('option');-->
-<!--                option.value = car.id;-->
-<!--                option.textContent = car.name;-->
-<!--                option.dataset.image = car.imageUrl; // 이미지 URL을 data 속성에 저장-->
-<!--                carSelect.appendChild(option);-->
-<!--            });-->
-
-<!--            // 기본적으로 첫 번째 차량의 이미지를 표시-->
-<!--            if (data.length > 0 && data[0].imageUrl) {-->
-<!--                carImage.src = data[0].imageUrl;-->
-<!--            }-->
-<!--        });-->
-
-<!--    carSelect.addEventListener('change', function() {-->
-<!--        const selectedOption = carSelect.options[carSelect.selectedIndex];-->
-<!--        const imageUrl = selectedOption.dataset.image;-->
-
-<!--        console.log("Selected image URL:", imageUrl);-->
-
-<!--        if (imageUrl) {-->
-<!--            carImage.src = imageUrl;-->
-<!--        } else {-->
-<!--            carImage.src = 'default-image.png'; // 기본 이미지로 설정-->
-<!--        }-->
-<!--    });-->
-
-<!--    // 예약 페이지로 이동 시 차량 ID를 URL 쿼리 파라미터로 추가-->
-<!--    reserveButton.addEventListener('click', function() {-->
-<!--        const selectedCarId = carSelect.value;-->
-<!--        window.location.href = `/reservation/new?carId=${selectedCarId}`;-->
-<!--    });-->
-<!--});-->
-<!--</script>-->
-<!--</body>-->
-<!--</html>-->
-
-<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
-<!--<head>-->
-<!--    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <meta name="keywords" content="">-->
-<!--    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">-->
-<!--    <meta name="description" content="">-->
-<!--    <title>Car Reservation</title>-->
-<!--    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">-->
-<!--    <link href="default.css" rel="stylesheet" type="text/css" media="all">-->
-<!--    <link href="fonts.css" rel="stylesheet" type="text/css" media="all">-->
-<!--    &lt;!&ndash;[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]&ndash;&gt;-->
-<!--</head>-->
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -152,13 +51,9 @@
 <div><br></div>
 
 <div id="wrapper1">
-    <div id="welcome" class="container">
-<!--        <div class="title">-->
-<!--            <h2>Welcome to our website</h2>-->
-<!--            <span class="byline">Mauris vulputate dolor sit amet nibh</span> </div>-->
-<!--        <div class="content">-->
-<!--            <p>This is <strong>Adequately</strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>. The photos in this template are from <a href="http://fotogrph.com/"> Fotogrph</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you're pretty much free to do whatever you want with it (even use it commercially) provided you give us credit for it. Have fun :) </p>-->
-<!--            <a href="#" class="button">Etiam posuere</a> </div>-->
+    <div id="welcome">
+        <h3>부총무: 010-4527-9904 안수성</h3>
+        <h3>차량 번호: 284다 8173</h3>
     </div>
 </div>
 

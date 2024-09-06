@@ -22,8 +22,9 @@
     <style>
         /* 캘린더 전체 너비와 높이 줄이기 */
         #calendar {
-            max-width: 800px; /* 원하는 너비로 조정 */
+            max-width: 80%; /* 원하는 너비로 조정 */
             margin: 0 auto; /* 중앙 정렬 */
+            display: flex;
         }
 
         /* FullCalendar 내부 요소 크기 줄이기 */
@@ -31,8 +32,56 @@
             font-size: 0.85em; /* 폰트 크기 줄이기 */
         }
 
+        .fc-daygrid-day-number {
+            color: #0d0d0d;
+        }
+        .fc-col-header-cell-cushion {
+            color: #0d0d0d;
+        }
+
+        .fc-day-today {
+            background-color: #D1D1D1 !important; /* Slate Gray */
+            border: 2px solid #D1D1D1 !important; /* Light Grayish Cyan */
+        }
+
         .fc-daygrid-day {
             padding: 5px; /* 각 날짜 셀의 패딩 줄이기 */
+        }
+
+        .fc-event-car-a {
+            background-color: #585858 !important; /* 라이트 그레이 */
+            border-color: #585858 !important; /* 동일한 회색 테두리 */
+            color: #333333 !important; /* 어두운 회색 글자 */
+        }
+
+        .fc-event-car-b {
+            background-color: #A9A9A9 !important; /* 중간 톤의 그레이 */
+            border-color: #A9A9A9 !important; /* 동일한 회색 테두리 */
+            color: #FFFFFF !important; /* 흰색 글자 */
+        }
+
+        /* 소형 화면 (모바일) */
+        @media (max-width: 768px) {
+            #calendar {
+                max-width: 100% !important;
+                margin: 0 auto !important;
+            }
+        }
+
+        /* 중형 화면 (태블릿) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            #calendar {
+                max-width: 90% !important;
+                margin: 0 auto !important;
+            }
+        }
+
+        /* 대형 화면 (데스크탑) */
+        @media (min-width: 1024px) and (max-width: 1440px) {
+            #calendar {
+                max-width: 80% !important;
+                margin: 0 auto !important;
+            }
         }
 
 
@@ -58,56 +107,66 @@
 </div>
 
 <div><br><br></div>
+<div class="flex-container">
 
-<form id="reservationForm" class="custom-form" role="form">
-    <div class="form-wrapper">
-        <div class="form-container">
-            <input type="hidden" name="carId" id="carId" th:value="${carId}"/>
+    <form id="reservationForm" class="custom-form" role="form">
+        <div class="form-wrapper">
+            <div class="form-container">
+                <input type="hidden" name="carId" id="carId" th:value="${carId}"/>
 
-            <div class="form-group">
-                <label for="name">신청자 이름</label>
-                <input type="text" name="name" id="name" class="form-control" placeholder="이름을 입력하세요"/>
+                <div class="form-group">
+                    <label for="name">신청자 이름</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="이름을 입력하세요"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="phoneNumber">핸드폰 번호</label>
+                    <input type="text" name="phoneNumber" id="phoneNumber" class="form-control"
+                           placeholder="꼭! (-)없이 번호를 입력하세요"
+                           oninput="removeHyphens(this)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="affiliation">신청 부서(팀)</label>
+                    <input type="text" name="affiliation" id="affiliation" class="form-control"
+                           placeholder="부서(팀)을 입력하세요"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="purpose">목적지 및 사용 목적</label>
+                    <input type="text" name="purpose" id="purpose" class="form-control"
+                           placeholder="목적지 : 사용 목적 형식으로 입력하세요"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="numberOfPassengers">탑승 인원</label>
+                    <input type="text" name="numberOfPassengers" id="numberOfPassengers" class="form-control"
+                           placeholder="탑승 인원을 입력하세요"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="startTime">차량 이용 시작 시간</label>
+                    <input type="text" id="startTime" name="startTime" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="endTime">차량 이용 완료 시간</label>
+                    <input type="text" id="endTime" name="endTime" class="form-control"/>
+                </div>
+
+                <!-- 버튼을 폼의 아래쪽 가운데에 배치할 영역 -->
+                <div class="form-button-container">
+                    <button type="submit" class="submit">제출</button>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="phoneNumber">핸드폰 번호</label>
-                <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" placeholder="(-)없이 번호를 입력하세요"/>
-            </div>
 
-            <div class="form-group">
-                <label for="affiliation">신청 부서(팀)</label>
-                <input type="text" name="affiliation" id="affiliation" class="form-control" placeholder="부서(팀)을 입력하세요"/>
-            </div>
-
-            <div class="form-group">
-                <label for="purpose">목적지 및 사용 목적</label>
-                <input type="text" name="purpose" id="purpose" class="form-control" placeholder="목적지 : 사용 목적 형식으로 입력하세요"/>
-            </div>
-
-            <div class="form-group">
-                <label for="numberOfPassengers">탑승 인원</label>
-                <input type="text" name="numberOfPassengers" id="numberOfPassengers" class="form-control" placeholder="탑승 인원을 입력하세요"/>
-            </div>
-
-            <div class="form-group">
-                <label for="startTime">차량 이용 시작 시간</label>
-                <input type="text" id="startTime" name="startTime" class="form-control"/>
-            </div>
-
-            <div class="form-group">
-                <label for="endTime">차량 이용 완료 시간</label>
-                <input type="text" id="endTime" name="endTime" class="form-control"/>
-            </div>
-
-            <!-- 버튼을 폼의 아래쪽 가운데에 배치할 영역 -->
-            <div class="form-button-container">
-                <button type="submit" class="submit">제출</button>
-            </div>
         </div>
+    </form>
+    <br>
+    <div id="calendar"></div> <!-- FullCalendar를 표시할 DIV -->
 
-        <div id="calendar"></div> <!-- FullCalendar를 표시할 DIV -->
-    </div>
-</form>
+</div>
 
 <div><br><br></div>
 <div><br><br></div>
@@ -115,7 +174,9 @@
 <!--footer-->
 <div><br><br></div>
 <div id="wrapper1">
-    <div id="welcome" class="container">
+    <div id="welcome">
+        <h3>부총무: 010-4527-9904 안수성</h3>
+        <h3>차량 번호: 284다 8173</h3>
     </div>
 </div>
 
@@ -161,6 +222,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     calendar.render();
 });
+
+function removeHyphens(input) {
+    // 하이픈이 포함된 입력을 제거
+    input.value = input.value.replace(/[^0-9]/g, '');
+}
 
 // 시간을 AM/PM 형식으로 변환하는 함수
 function formatTime(date) {
@@ -272,6 +338,7 @@ $('#reservationForm').on('submit', function(event) {
 
     });
 });
+
 
 </script>
 </body>

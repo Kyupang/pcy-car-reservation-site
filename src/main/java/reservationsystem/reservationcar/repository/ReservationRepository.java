@@ -68,7 +68,7 @@ public class ReservationRepository {
 
     public boolean existsByCarIdAndTimeOverlap(Long carId, LocalDateTime startTime, LocalDateTime endTime) {
         Long count = em.createQuery(
-                        "SELECT COUNT(r) FROM Reservation r WHERE r.car.id = :carId AND r.startTime < :endTime AND r.endTime > :startTime", Long.class)
+                        "SELECT COUNT(r) FROM Reservation r WHERE r.car.id = :carId AND r.startTime < :endTime AND r.endTime > :startTime AND r.reservationStatus <> 'cancel'", Long.class)
                 .setParameter("carId", carId)
                 .setParameter("startTime", startTime)
                 .setParameter("endTime", endTime)
