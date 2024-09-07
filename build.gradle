@@ -30,10 +30,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-<<<<<<< HEAD
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
-=======
->>>>>>> 63d6fc3860df9f039783037c1b2909d5e77ffd2c
 	implementation 'mysql:mysql-connector-java:8.0.31'
 	implementation 'net.nurigo:sdk:4.3.0'
 	compileOnly 'org.projectlombok:lombok'

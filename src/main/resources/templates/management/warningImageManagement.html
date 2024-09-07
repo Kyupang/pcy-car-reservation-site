@@ -35,10 +35,7 @@
 
 <div><br><br></div>
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 63d6fc3860df9f039783037c1b2909d5e77ffd2c
 <form id="warning-form" class="car-form-container" role="form" method="post" enctype="multipart/form-data" action="/ImageUpload">
     <div class="form-group">
         <input type="file" id="car-image-upload" name="file" class="form-control" accept="image/*"/>
@@ -58,11 +55,7 @@
 </div>
 
 <script>
-<<<<<<< HEAD
    document.getElementById('warning-form').addEventListener('submit', function(event) {
-=======
-    document.getElementById('warning-form').addEventListener('submit', function(event) {
->>>>>>> 63d6fc3860df9f039783037c1b2909d5e77ffd2c
         event.preventDefault();
 
         const form = event.target;
@@ -74,15 +67,8 @@
         })
         .then(response => {
             if (response.ok) {
-<<<<<<< HEAD
                 window.location.href = '/';
             } else {
-=======
-                // Redirect to home page if the response is successful
-                window.location.href = '/';
-            } else {
-                // Handle response error
->>>>>>> 63d6fc3860df9f039783037c1b2909d5e77ffd2c
                 return response.json().then(data => {
                     document.getElementById('response-message').textContent = '이미지 등록에 실패했습니다: ' + (data.message || '알 수 없는 오류');
                 });
