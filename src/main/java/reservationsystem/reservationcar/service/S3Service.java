@@ -22,7 +22,7 @@ public class S3Service {
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentType(file.getContentType());
         metadata.setContentLength(file.getSize());
-        amazonS3Client.putObject(BUCKET_NAME, fileName, file.getInputStream(), metadata);
+        amazonS3Client.putObject(BUCKET_NAME, location + "/" + fileName, file.getInputStream(), metadata);
         return fileUrl;
     }
 }

@@ -49,7 +49,7 @@ public class SmsService {
      */
     public SingleMessageSentResponse sendManager(String from, String register) {
         Message message = new Message();
-        message.setFrom(from);
+        message.setFrom("01045279904");
         message.setTo("01045279904");
         message.setText(register + "님 에게 차량 예약신청이 들어왔습니다! ");
         return this.messageService.sendOne(new SingleMessageSendingRequest(message));
