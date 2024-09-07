@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/reservationcar
-    username: root  # MySQL 사용자 이름으로 변경
-    password: 1234  # MySQL 비밀번호로 변경
+    url: jdbc:mysql://pych-car-database.chqw4geoevgr.ap-northeast-2.rds.amazonaws.com/pych_car_reservation
+    username: admin
+    password: rlarbghks12
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -16,10 +16,13 @@ logging:
   level:
     org.hibernate.SQL: debug
 
-upload:
-  path: C:/Users/KimKyuHwan/Desktop/upload
 
-sms:
-  api:
-    key: NCSUOSOZHFQ9DNVW
-    secret: PY1WROKIFUZVF7CK1DLLZFZYCUQBBSYY
+cloud:
+  aws:
+    s3:
+      bucket: pych-car-reservation-bucket
+    stack.auto: false
+    region.static: ap-northeast-2
+    credentials:
+      accessKey: AKIA44Y6CPFOQ36BVTWS
+      secretKey: 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

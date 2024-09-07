@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -23,16 +24,14 @@ import reservationsystem.reservationcar.repository.ImageRepository;
 import reservationsystem.reservationcar.repository.PostRepository;
 
 @Service
+@RequiredArgsConstructor
 public class PostService {
 
-    @Autowired
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
-    @Autowired
-    private ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
 
-    @Value("${upload.path}")
-    private String uploadPath;
+    private final S3Service s3Service;  // S3 서비스 추가
 
     @Transactional
     public PostDTO savePost(PostDTO postDTO, List<MultipartFile> files, String boardType) throws IOException {
@@ -68,7 +67,8 @@ public class PostService {
             images = files.stream()
                     .map(file -> {
                         try {
-                            String url = saveFile(file); // Assuming saveFile method handles the file storage
+                            // S3에 파일 저장
+                            String url = s3Service.uploadFile(file, "post"); // "post" 폴더에 저장
                             Image image = new Image();
                             image.setUrl(url);
                             image.setPost(savedPost);
@@ -110,19 +110,5 @@ public class PostService {
                 .map(Image::getUrl)
                 .collect(Collectors.toList()));
         return postDTO;
-    }
-
-    private String saveFile(MultipartFile file) throws IOException {
-        // Define the path to save the file
-        Path filePath = Paths.get(uploadPath, "post", file.getOriginalFilename());
-
-        // Create directories if not exist
-        Files.createDirectories(filePath.getParent());
-
-        // Save file to the specified location
-        file.transferTo(filePath.toFile());
-
-        // Return the URL for accessing the file
-        return "/post/" + file.getOriginalFilename();
     }
 }

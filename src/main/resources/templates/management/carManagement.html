@@ -36,26 +36,20 @@
 <div><br><br></div>
 
 <div class="car-form-container">
-    <form id="car-form" role="form" method="post" enctype="multipart/form-data">
+    <form id="car-form" enctype="multipart/form-data" method="POST" action="/car/new">
         <div class="form-group">
             <label for="car-name">차량 이름:</label>
             <input type="text" id="car-name" name="name" class="form-control" placeholder="이름을 입력하세요"/>
-            <p id="car-name-error" class="error-message"></p>
         </div>
 
         <div class="form-group">
             <label for="car-plate">차량 번호판:</label>
             <input type="text" id="car-plate" name="carNumber" class="form-control" placeholder="번호판을 입력하세요"/>
-            <p id="car-plate-error" class="error-message"></p>
         </div>
 
         <div class="form-group">
             <label for="car-image-upload">차량 이미지 업로드:</label>
-            <input type="file" id="car-image-upload" class="form-control" accept="image/*"/>
-        </div>
-
-        <div class="car-image">
-            <img id="car-image" src="default-image.png" alt="Vehicle image"/>
+            <input type="file" id="car-image-upload" name="image" class="form-control" accept="image/*" required><br>
         </div>
 
         <button type="submit" class="submit">등록</button>
@@ -102,53 +96,38 @@
             }
         });
 
-    document.getElementById('car-form').addEventListener('submit', function(event) {
-        event.preventDefault();
+        document.getElementById('car-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
 
-        const fileInput = document.getElementById('car-image-upload');
-        const file = fileInput.files[0];
-        const carName = document.getElementById('car-name').value;
-        const carPlate = document.getElementById('car-plate').value;
+            const fileInput = document.getElementById('car-image-upload');
+            const file = fileInput.files[0];
+            const carName = document.getElementById('car-name').value;
+            const carPlate = document.getElementById('car-plate').value;
 
-        const formData = new FormData();
-        formData.append('name', carName);
-        formData.append('carNumber', carPlate);
-        if (file) {
-            formData.append('image', file);
-        }
-
-        fetch('/car/new', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-                // Redirect to home page if the response is successful
-                window.location.href = '/';
-            } else {
-                // Handle response error
-                return response.json().then(data => {
-                    document.getElementById('response-message').textContent = '차량 등록에 실패했습니다: ' + (data.message || '알 수 없는 오류');
-                });
+            const formData = new FormData();
+            formData.append('name', carName);
+            formData.append('carNumber', carPlate);
+            if (file) {
+                formData.append('image', file);
             }
-        })
-        .catch(error => {
-            document.getElementById('response-message').textContent = '차량 등록에 실패했습니다.';
+
+            fetch(this.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/'; // Redirect to home page on success
+                } else {
+                    return response.json().then(data => {
+                        document.getElementById('response-message').textContent = '차량 등록에 실패했습니다: ' + (data.message || '알 수 없는 오류');
+                    });
+                }
+            })
+            .catch(error => {
+                document.getElementById('response-message').textContent = '차량 등록에 실패했습니다.';
+            });
         });
-    });
-
-    // 파일 선택 시 이미지 미리보기
-    document.getElementById('car-image-upload').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('car-image').src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-</script>
+    </script>
 </body>
 </html>
