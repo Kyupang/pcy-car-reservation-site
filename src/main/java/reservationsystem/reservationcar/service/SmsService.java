@@ -30,9 +30,21 @@ public class SmsService {
 
     private final DefaultMessageService messageService;
 
+<<<<<<< HEAD
     public SmsService() {
         // 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
         this.messageService = NurigoApp.INSTANCE.initialize("NCSUOSOZHFQ9DNVW","PY1WROKIFUZVF7CK1DLLZFZYCUQBBSYY", "https://api.coolsms.co.kr");
+=======
+    @Value("${sms.api.key}")
+    private String apiKey;
+
+    @Value("${sms.api.secret}")
+    private String apiSecret;
+
+    public SmsService() {
+        // 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
+        this.messageService = NurigoApp.INSTANCE.initialize(apiKey,apiSecret, "https://api.coolsms.co.kr");
+>>>>>>> 63d6fc3860df9f039783037c1b2909d5e77ffd2c
     }
 
     /**
