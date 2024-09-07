@@ -32,7 +32,7 @@ public class SmsService {
 
     public SmsService() {
         // 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
-        this.messageService = NurigoApp.INSTANCE.initialize("NCSUOSOZHFQ9DNVW","PY1WROKIFUZVF7CK1DLLZFZYCUQBBSYY", "https://api.coolsms.co.kr");
+        this.messageService = NurigoApp.INSTANCE.initialize("NCSPPZGRSZPQRCWL","LCGSALWLE0G3NJAGRJDLBHRSHNWJGMZ2", "https://api.coolsms.co.kr");
     }
 
     /**
@@ -57,7 +57,7 @@ public class SmsService {
 
     public SingleMessageSentResponse sendRegister(String to) {
         Message message = new Message();
-        message.setFrom("01022428885");
+        message.setFrom("01045279904");
         message.setTo(to);
         message.setText("차량 예약이 승인 되었습니다.\n"
                 + "게시판에 운행 전, 후 사진을 업로드 부탁드립니다.");
