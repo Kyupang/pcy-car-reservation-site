@@ -53,16 +53,23 @@
 </div>
 
 <script>
-    function checkPassword() {
-      const password = document.getElementById('password').value;
-      const correctPassword = '0000';
+    async function checkPassword() {
+    const password = document.getElementById('password').value;
 
-      if (password === correctPassword) {
-        window.location.href = '/management'; // 관리자 페이지 URL로 변경하세요
-      } else {
-        alert('비밀번호가 잘못되었습니다.');
-      }
+    const response = await fetch('/management/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ password }),
+    });
+
+    if (response.ok) {
+      window.location.href = '/management'; // 관리자 페이지 URL로 변경하세요
+    } else {
+      alert('비밀번호가 잘못되었습니다.');
     }
+  }
   </script>
 </body>
 </html>
