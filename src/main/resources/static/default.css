@@ -857,6 +857,7 @@
   }
 
   #reservation-table th {
+      width: auto;
       padding: 2% 3%;
       text-align: left; /* 텍스트 정렬 */
       border-bottom: 2px solid #ddd; /* 하단 경계선 */
@@ -868,6 +869,7 @@
   }
 
   #reservation-table td {
+      width: auto;
       padding: 2% 3%; /* 셀 패딩 */
       border-bottom: 1px solid #ddd; /* 하단 경계선 */
       font-size: 0.8rem; /* 폰트 크기 설정 */
