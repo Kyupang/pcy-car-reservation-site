@@ -51,6 +51,10 @@
             <span class="reservation-detail" th:text="${reservationRequestDTO.phoneNumber}"></span>
         </div>
         <div class="reservation-item">
+            <strong class="reservation-label">운전자:</strong>
+            <span class="reservation-detail" th:text="${reservationRequestDTO.driver}"></span>
+        </div>
+        <div class="reservation-item">
             <strong class="reservation-label">소속:</strong>
             <span class="reservation-detail" th:text="${reservationRequestDTO.affiliation}"></span>
         </div>
@@ -76,6 +80,7 @@
         <input type="hidden" name="carId" th:value="${carId}"/>
         <input type="hidden" name="name" th:value="${reservationRequestDTO.name}"/>
         <input type="hidden" name="phoneNumber" th:value="${reservationRequestDTO.phoneNumber}"/>
+        <input type="hidden" name="driver" th:value="${reservationRequestDTO.driver}"/>
         <input type="hidden" name="affiliation" th:value="${reservationRequestDTO.affiliation}"/>
         <input type="hidden" name="purpose" th:value="${reservationRequestDTO.purpose}"/>
         <input type="hidden" name="numberOfPassengers" th:value="${reservationRequestDTO.numberOfPassengers}"/>

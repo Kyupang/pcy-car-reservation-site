@@ -64,6 +64,7 @@ public class ReservationController {
             @RequestParam("carId") Long carId,
             @RequestParam("name") String name,
             @RequestParam("phoneNumber") String phoneNumber,
+            @RequestParam("driver") String driver,
             @RequestParam("affiliation") String affiliation,
             @RequestParam("purpose") String purpose,
             @RequestParam("numberOfPassengers") String numberOfPassengers,
@@ -74,6 +75,7 @@ public class ReservationController {
         ReservationRequestDTO requestDTO = new ReservationRequestDTO();
         requestDTO.setName(name);
         requestDTO.setPhoneNumber(phoneNumber);
+        requestDTO.setDriver(driver);
         requestDTO.setAffiliation(affiliation);
         requestDTO.setPurpose(purpose);
         requestDTO.setNumberOfPassengers(numberOfPassengers);

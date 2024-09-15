@@ -17,6 +17,8 @@ public class ReservationRequestDTO {
     @NotEmpty(message = "번호 입력은 필수입니다")
     private String phoneNumber;
 
+    private String driver;
+
     @NotEmpty(message = "소속 입력은 필수입니다")
     private String affiliation;
 

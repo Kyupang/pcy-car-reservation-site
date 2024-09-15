@@ -32,6 +32,8 @@ public class Reservation {
 
     private String phoneNumber;
 
+    private String driver;
+
     private String affiliation;
 
     private String purpose;

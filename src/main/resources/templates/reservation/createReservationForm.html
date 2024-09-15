@@ -133,6 +133,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="driver">운전자 이름 / 핸드폰 번호</label>
+                    <input type="text" name="driver" id="driver" class="form-control" placeholder="운전자 이름과 번호를 입력하세요"/>
+                </div>
+
+                <div class="form-group">
                     <label for="affiliation">신청 부서(팀)</label>
                     <input type="text" name="affiliation" id="affiliation" class="form-control"
                            placeholder="부서(팀)을 입력하세요"/>
@@ -271,6 +276,7 @@ $('#reservationForm').on('submit', function(event) {
     // 클라이언트 측 유효성 검사
     var name = $('#name').val().trim();
     var phoneNumber = $('#phoneNumber').val().trim();
+    var driver = $('#driver').val().trim();
     var affiliation = $('#affiliation').val().trim();
     var purpose = $('#purpose').val();
     var numberOfPassengers = $('#numberOfPassengers').val();
@@ -330,13 +336,14 @@ $('#reservationForm').on('submit', function(event) {
                 var carId = $('#carId').val();
                 var name = $('#name').val();
                 var phoneNumber = $('#phoneNumber').val();
+                var driver = $('#driver').val();
                 var affiliation = $('#affiliation').val();
                 var purpose = $('#purpose').val();
                 var numberOfPassengers = $('#numberOfPassengers').val();
                 var startTime = $('#startTime').val();
                 var endTime = $('#endTime').val();
 
-                window.location.href = `/reservation/confirm?carId=${carId}&name=${name}&phoneNumber=${phoneNumber}&affiliation=${affiliation}&purpose=${purpose}&numberOfPassengers=${numberOfPassengers}&startTime=${startTime}&endTime=${endTime}`;
+                window.location.href = `/reservation/confirm?carId=${carId}&name=${name}&phoneNumber=${phoneNumber}&driver=${driver}&affiliation=${affiliation}&purpose=${purpose}&numberOfPassengers=${numberOfPassengers}&startTime=${startTime}&endTime=${endTime}`;
             } else {
                 alert(response.errorMessage);
             }

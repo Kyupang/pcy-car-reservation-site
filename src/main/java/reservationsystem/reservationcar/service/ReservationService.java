@@ -33,6 +33,7 @@ public class ReservationService {
         reservation.setCar(car);
         reservation.setName(requestDTO.getName());
         reservation.setPhoneNumber(requestDTO.getPhoneNumber());
+        reservation.setDriver(requestDTO.getDriver());
         reservation.setAffiliation(requestDTO.getAffiliation());
         reservation.setPurpose(requestDTO.getPurpose());
         reservation.setNumberOfPassengers(requestDTO.getNumberOfPassengers());
