@@ -39,9 +39,6 @@ jobs:
         with:
           arguments: build
 
-      - name: List current directory
-        run: ls -al
-        
       - name: Make zip File
         run: zip -r ./build.zip ./build/libs/*.war ./appspec.yml ./.aws/aws-codedeploy-scripts
 
