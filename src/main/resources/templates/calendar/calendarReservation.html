@@ -34,11 +34,7 @@
             color: #0d0d0d;
         }
 
-        .fc-event {
-            background-color: #A9A9A9 !important; /* 중간 톤의 그레이 */
-            border-color: #A9A9A9 !important; /* 동일한 회색 테두리 */
-            color: #FFFFFF !important; /* 흰색 글자 */
-        }
+
 
         .fc-day-today {
             background-color: #D1D1D1 !important; /* Slate Gray */
@@ -48,7 +44,7 @@
         .fc-event-car-a {
             background-color: #585858 !important; /* 라이트 그레이 */
             border-color: #585858 !important; /* 동일한 회색 테두리 */
-            color: #333333 !important; /* 어두운 회색 글자 */
+            color: #FFFFFF !important; /* 어두운 회색 글자 */
         }
 
         .fc-event-car-b {
@@ -105,7 +101,14 @@
 </div>
 
 <div><br><br></div>
-
+<div id="calendar-legend" style="text-align: center; margin-bottom: 10px;">
+    <span class="legend-item" style="background-color: #585858; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-right: 5px;">
+        스타리아 284다 8173
+    </span>
+    <span class="legend-item" style="background-color: #A9A9A9; color: #FFFFFF; padding: 5px; border-radius: 3px;">
+        스타렉스
+    </span>
+</div>
 <div id="calendar"></div> <!-- FullCalendar를 표시할 DIV -->
 
 <!--footer-->
@@ -147,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
         eventClassNames: function(arg) {
             var carName = arg.event.extendedProps.carName; // 차량 이름 가져오기
             switch(carName) {
-                case '스타리아':
+                case '스타리아 284다 8173':
                     return 'fc-event-car-a';
                 case '스타렉스':
                     return 'fc-event-car-b';

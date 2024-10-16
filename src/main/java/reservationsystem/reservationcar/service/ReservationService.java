@@ -39,7 +39,7 @@ public class ReservationService {
         reservation.setNumberOfPassengers(requestDTO.getNumberOfPassengers());
         reservation.setStartTime(requestDTO.getStartTime());
         reservation.setEndTime(requestDTO.getEndTime());
-        reservation.setReservationTime(LocalDateTime.now());
+        reservation.setReservationTime(LocalDateTime.now().withNano(0));
         reservation.setReservationStatus(ReservationStatus.REQUESTED);
 
         reservationRepository.save(reservation);

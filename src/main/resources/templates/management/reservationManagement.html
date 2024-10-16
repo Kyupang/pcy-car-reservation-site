@@ -34,9 +34,9 @@
 </div>
 
 <div><br><br></div>
-
-<table id="reservation-table">
-    <thead>
+<div class="table-container">
+    <table id="reservation-table">
+        <thead>
     <tr>
         <th>예약 번호</th>
         <th>예약자 이름</th>
@@ -46,49 +46,53 @@
         <th>신청 부서(팀)</th>
         <th>사용 목적</th>
         <th>탑승 인원</th>
+        <th>예약 신청 일시</th>
         <th>차량 사용 시작 시간</th>
         <th>차량 사용 끝나는 시간</th>
         <th>예약 상태</th>
         <th>예약 취소</th>
     </tr>
     </thead>
-    <tbody>
-    <tr th:each="reservation : ${reservationTextList}">
-        <td th:text="${reservation.id}">예약 번호</td>
-        <td th:text="${reservation.name}">예약자 이름</td>
-        <td th:text="${reservation.phoneNumber}">예약자 전화번호</td>
-        <td th:text="${reservation.driver}">운전자 정보</td>
-        <td th:text="${reservation.car.name}">차량 이름</td>
-        <td th:text="${reservation.affiliation}">신청 부서(팀)</td>
-        <td th:text="${reservation.purpose}">사용 목적</td>
-        <td th:text="${reservation.numberOfPassengers}">탑승 인원</td>
-        <td th:text="${reservation.startTime}">차량 사용 시작 시간</td>
-        <td th:text="${reservation.endTime}">차량 사용 끝나는 시간</td>
-        <td>
+        <tbody>
+        <tr th:each="reservation : ${reservationTextList}">
+            <td th:text="${reservation.id}">예약 번호</td>
+            <td th:text="${reservation.name}">예약자 이름</td>
+            <td th:text="${reservation.phoneNumber}">예약자 전화번호</td>
+            <td th:text="${reservation.driver}">운전자 정보</td>
+            <td th:text="${reservation.car.name}">차량 이름</td>
+            <td th:text="${reservation.affiliation}">신청 부서(팀)</td>
+            <td th:text="${reservation.purpose}">사용 목적</td>
+            <td th:text="${reservation.numberOfPassengers}">탑승 인원</td>
+            <td th:text="${reservation.reservationTime}">예약 신청 일시</td>
+            <td th:text="${reservation.startTime}">차량 사용 시작 시간</td>
+            <td th:text="${reservation.endTime}">차량 사용 끝나는 시간</td>
+            <td>
             <span th:text="${reservation.reservationStatus.name() == 'APPROVED' ? '승인됨' :
                      reservation.reservationStatus.name() == 'CANCEL' ? '취소됨' :
                      reservation.reservationStatus.name() == 'REQUESTED' ? '요청됨' :
                      '알 수 없음'}">예약 상태</span>
-        </td>
-        <td>
-            <form th:if="${reservation.reservationStatus != 'CANCEL'}"
-                  th:action="@{/reservation/{id}/cancel(id=${reservation.id})}" method="post">
-                <button type="submit">취소</button>
-            </form>
-            <form th:if="${reservation.reservationStatus != 'CANCEL'}"
-                  th:action="@{/reservation/{id}/approve(id=${reservation.id})}"
-                  method="post">
-                <button type="submit">승인</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+            </td>
+            <td>
+                <form th:if="${reservation.reservationStatus != 'CANCEL'}"
+                      th:action="@{/reservation/{id}/cancel(id=${reservation.id})}" method="post">
+                    <button type="submit">취소</button>
+                </form>
+                <form th:if="${reservation.reservationStatus != 'CANCEL'}"
+                      th:action="@{/reservation/{id}/approve(id=${reservation.id})}"
+                      method="post">
+                    <button type="submit">승인</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 
 <ul class="pagination">
     <!-- 이전 버튼 -->
     <li th:if="${currentPage > 0}">
-        <a th:href="@{/reservation/textList/?page=${currentPage - 1}}">이전</a>
+        <a th:href="@{/reservation/textList(page=${currentPage - 1})}">이전</a>
     </li>
     <li th:unless="${currentPage > 0}">
         <a class="disabled">이전</a>
@@ -101,7 +105,7 @@
 
     <!-- 다음 버튼 -->
     <li th:if="${currentPage < totalPages - 1}">
-        <a th:href="@{/reservation/textList?page=${currentPage + 1}}">다음</a>
+        <a th:href="@{/reservation/textList(page=${currentPage + 1})}">다음</a>
     </li>
     <li th:unless="${currentPage < totalPages - 1}">
         <a class="disabled">다음</a>
