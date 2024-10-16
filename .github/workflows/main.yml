@@ -40,7 +40,7 @@ jobs:
           arguments: build
 
       - name: Make zip File
-        run: zip -r ./build.zip ./build/libs/*.war ./appspec.yml ./.aws/aws-codedeploy-scripts
+        run: zip -r ./build.zip ./build/libs/*.war ./appspec.yml .aws/aws-codedeploy-scripts
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
