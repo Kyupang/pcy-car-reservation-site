@@ -1,4 +1,4 @@
-# This workflow uses actions that are not certified by GitHub.
+  # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
@@ -40,7 +40,7 @@ jobs:
           arguments: build
 
       - name: Make zip File
-        run: zip -r ./build.zip ./build/libs/*.war ./appspec.yml .aws/aws-codedeploy-scripts
+        run: zip -r ./build.zip ./build/libs/*.war ./appspec.yml ./.aws/aws-codedeploy-scripts
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
