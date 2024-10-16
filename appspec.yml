@@ -3,7 +3,7 @@ os: linux
 files:
   - source: build/libs
     destination: /home/ubuntu/pcy-car-reservation-site/build/libs
-  - source: .aws/aws-codedeploy-scripts
+  - source: /.aws/aws-codedeploy-scripts
     destination: /home/ubuntu/pcy-car-reservation-site/.aws/aws-codedeploy-scripts
 file_exists_behavior: OVERWRITE
 permissions:
@@ -13,10 +13,10 @@ permissions:
     group: ubuntu
 hooks:
   AfterInstall:
-    - location: /home/ubuntu/pcy-car-reservation-site/.aws/aws-codedeploy-scripts/stop.sh
+    - location: ./.aws/aws-codedeploy-scripts/stop.sh
       timeout: 30
       runas: ubuntu
   ApplicationStart:
-    - location: /home/ubuntu/pcy-car-reservation-site/.aws/aws-codedeploy-scripts/start.sh
+    - location: ./.aws/aws-codedeploy-scripts/start.sh
       timeout: 60
       runas: ubuntu
