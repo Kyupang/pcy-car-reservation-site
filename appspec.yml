@@ -13,7 +13,7 @@ permissions:
     group: ubuntu
 hooks:
   AfterInstall:
-    - location: ./.aws/aws-codedeploy-scripts/stop.sh
+    - location: ./.aws/aws-codedeploy-scripts/stop.sh 
       timeout: 30
       runas: ubuntu
   ApplicationStart:
