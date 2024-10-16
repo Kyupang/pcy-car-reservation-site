@@ -39,8 +39,11 @@ jobs:
         with:
           arguments: build
 
+      - name: List current directory
+        run: ls -al
+        
       - name: Make zip File
-        run: zip -r ./build.zip ./build/libs/*.war ./appspec.yml ./.aws/aws-codedeploy-scripts
+        run: zip -r ./build.zip ./build/libs/*.war ./appspec.yml ./.aws/aws-codedeploy-scripts
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -59,3 +62,5 @@ jobs:
           --deployment-group-name cd-deploy-group-car-reservation \
           --deployment-config-name CodeDeployDefault.AllAtOnce \
           --s3-location bucket=aws-cd-bucket,bundleType=zip,key=buildfolder/build.zip
+
+      
