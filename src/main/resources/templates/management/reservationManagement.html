@@ -92,7 +92,7 @@
 <ul class="pagination">
     <!-- 이전 버튼 -->
     <li th:if="${currentPage > 0}">
-        <a th:href="@{/reservation/textList(page=${currentPage - 1})}">이전</a>
+        <a th:href="@{/reservation/management(page=${currentPage - 1})}">이전</a>
     </li>
     <li th:unless="${currentPage > 0}">
         <a class="disabled">이전</a>
@@ -105,7 +105,7 @@
 
     <!-- 다음 버튼 -->
     <li th:if="${currentPage < totalPages - 1}">
-        <a th:href="@{/reservation/textList(page=${currentPage + 1})}">다음</a>
+        <a th:href="@{/reservation/management(page=${currentPage + 1})}">다음</a>
     </li>
     <li th:unless="${currentPage < totalPages - 1}">
         <a class="disabled">다음</a>
