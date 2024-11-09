@@ -19,6 +19,7 @@ import reservationsystem.reservationcar.repository.PostRepository;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class PostService {
 
     private final PostRepository postRepository;

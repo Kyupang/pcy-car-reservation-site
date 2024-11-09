@@ -50,7 +50,8 @@ public class ReservationService {
     }
 
     public boolean isTimeOverlap(Long carId, LocalDateTime startTime, LocalDateTime endTime) {
-        boolean hasOverlap = reservationRepository.existsByCarIdAndTimeOverlap(carId, startTime, endTime);
+        boolean hasOverlap = reservationRepository.existsByCarIdAndTimeOverlap(
+                carId, startTime, endTime);
 
         return hasOverlap;
     }

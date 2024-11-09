@@ -7,6 +7,7 @@ import reservationsystem.reservationcar.domain.WarningImage;
 import reservationsystem.reservationcar.repository.WarningImageRepository;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class WarningImageService {
 
