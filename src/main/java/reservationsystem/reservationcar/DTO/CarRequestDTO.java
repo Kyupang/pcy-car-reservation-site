@@ -1,17 +1,14 @@
 package reservationsystem.reservationcar.DTO;
 
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class CarRequestDTO {
 
     @NotEmpty(message = "회원 이름은 필수 입니다")
-    private String name;
+    private String carName;
+
     @NotEmpty(message = "차량 넘버는 필수 입니다")
     private String carNumber;
-
-    private String imageUrl;
 }

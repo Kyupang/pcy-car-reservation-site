@@ -13,12 +13,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
 
 @Entity
-@Getter @Setter
+@Data
 public class Reservation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservation_id")
@@ -53,6 +54,7 @@ public class Reservation {
 
     private LocalDateTime reservationTime;
 
+    // 차량정보에서 예약된 내용을 조회하기 위함
     public void setCar(Car car) {
         this.car = car;
         car.getReservations().add(this);
@@ -73,4 +75,5 @@ public class Reservation {
 
         this.setReservationStatus(ReservationStatus.APPROVED);
     }
+
 }

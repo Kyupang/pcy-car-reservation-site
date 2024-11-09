@@ -19,14 +19,6 @@ public class CarRepository {
         return em.find(Car.class, id);
     }
 
-//    public void delete(Long id) {
-//        Car car = em.find(Car.class, id);
-//
-//        if (car != null) {
-//            em.remove(car);
-//        }
-//    }
-
     public List<Car> findAll() {
         return em.createQuery("select c from Car c", Car.class)
                 .getResultList();
@@ -36,5 +28,13 @@ public class CarRepository {
 //        return em.createQuery("select c from Car c where c.name = :name", Car.class)
 //                .setParameter("name", name)
 //                .getResultList();
+//    }
+
+//    public void delete(Long id) {
+//        Car car = em.find(Car.class, id);
+//
+//        if (car != null) {
+//            em.remove(car);
+//        }
 //    }
 }

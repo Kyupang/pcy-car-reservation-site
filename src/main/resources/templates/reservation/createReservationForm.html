@@ -91,6 +91,8 @@
         }
 
 
+
+
     </style>
 </head>
 <body>
@@ -129,7 +131,7 @@
                     <label for="phoneNumber">핸드폰 번호</label>
                     <input type="text" name="phoneNumber" id="phoneNumber" class="form-control"
                            placeholder="꼭! (-)없이 번호를 입력하세요"
-                           oninput="removeHyphens(this)" />
+                           oninput="removeHyphens(this)"/>
                 </div>
 
                 <div class="form-group">
@@ -253,7 +255,7 @@ function formatTime(date) {
 function initializeFlatpickr(selector) {
     flatpickr(selector, {
         enableTime: true,
-        dateFormat: "Y-m-d\\TH:i:S", // ISO 8601 형식으로 변경
+        dateFormat: "Y-m-d\\TH:i:S",
         time_24hr: true,
         minuteIncrement: 30,
         defaultDate: new Date(),
@@ -325,7 +327,6 @@ $('#reservationForm').on('submit', function(event) {
         return;
     }
 
-    // 모든 유효성 검사를 통과하면 서버로 데이터를 전송합니다.
     var formData = $(this).serialize();
     $.ajax({
         type: 'POST',
@@ -351,6 +352,8 @@ $('#reservationForm').on('submit', function(event) {
 
     });
 });
+
+
 
 
 </script>

@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,8 @@ import reservationsystem.reservationcar.repository.ReservationRepository;
 @RequiredArgsConstructor
 public class ReservationService {
 
-    @Autowired private final ReservationRepository reservationRepository;
-    @Autowired private final CarRepository carRepository;
+    private final ReservationRepository reservationRepository;
+    private final CarRepository carRepository;
 
     @Transactional
     public ResponseEntity<?> createReservation(Long carId, ReservationRequestDTO requestDTO) {
@@ -45,12 +44,13 @@ public class ReservationService {
         reservationRepository.save(reservation);
 
         // 예약 성공 시 200 OK와 예약 ID를 반환
+        // 궁금한점 200을 보내지 않으면 다른 코드가 반환되나 400, 404 등?
+        // reservationId": [예약 ID]
         return ResponseEntity.ok(Collections.singletonMap("reservationId", reservation.getId()));
     }
 
     public boolean isTimeOverlap(Long carId, LocalDateTime startTime, LocalDateTime endTime) {
-        boolean hasOverlap = reservationRepository.existsByCarIdAndTimeOverlap(
-                carId, startTime, endTime);
+        boolean hasOverlap = reservationRepository.existsByCarIdAndTimeOverlap(carId, startTime, endTime);
 
         return hasOverlap;
     }
@@ -71,6 +71,7 @@ public class ReservationService {
     public List<Reservation> getReservationResultsById(Long carId) {
         return reservationRepository.findByCarId(carId);
     }
+
     public List<Reservation> getReservationResults() {
         return reservationRepository.findAll();
     }

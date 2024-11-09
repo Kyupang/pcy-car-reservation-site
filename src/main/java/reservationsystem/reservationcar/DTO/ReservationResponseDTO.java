@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ReservationResultDTO {
+public class ReservationResponseDTO {
     private String carName;
     private String affiliation;
     private LocalDateTime start;

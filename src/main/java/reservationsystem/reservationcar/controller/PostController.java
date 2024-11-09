@@ -4,20 +4,15 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import reservationsystem.reservationcar.DTO.PostDTO;
-import reservationsystem.reservationcar.domain.Post;
 import reservationsystem.reservationcar.service.PostService;
 
 @Controller
@@ -54,7 +49,6 @@ public class PostController {
     // 새 게시글 작성 페이지를 보여주는 매핑
     @GetMapping("/post/newPost/{boardType}")
     public String showCreatePostForm(@PathVariable String boardType, Model model) {
-        // 모델에 필요한 데이터를 추가할 수 있습니다.
         model.addAttribute("post", new PostDTO());
         model.addAttribute("boardType", boardType);
 
@@ -73,16 +67,14 @@ public class PostController {
                              @RequestParam("title") String title,
                              @RequestParam("content") String content,
                              @RequestParam("author") String author,
-                             @RequestParam(value = "files", required = false) List<MultipartFile> files,
-                             Model model) throws IOException {
+                             @RequestParam(value = "files", required = false) List<MultipartFile> files) throws IOException {
         PostDTO postDTO = new PostDTO();
         postDTO.setTitle(title);
         postDTO.setContent(content);
         postDTO.setAuthor(author);
         postDTO.setTimestamp(LocalDateTime.now());
-        PostDTO createdPostDTO = postService.savePost(postDTO, files, boardType);
+        postService.savePost(postDTO, files, boardType);
 
-        model.addAttribute("post", createdPostDTO);
         return "redirect:/post/" + boardType + "List"; // 게시글 목록 페이지로 리다이렉트
     }
 

@@ -1,53 +1,27 @@
 package reservationsystem.reservationcar.controller;
 
-import jakarta.validation.Valid;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import reservationsystem.reservationcar.DTO.CarRequestDTO;
-import reservationsystem.reservationcar.DTO.CarResponseDTO;
-import reservationsystem.reservationcar.domain.Car;
-import reservationsystem.reservationcar.service.CarService;
-import org.springframework.beans.factory.annotation.Value;import jakarta.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import reservationsystem.reservationcar.DTO.CarRequestDTO;
 import reservationsystem.reservationcar.DTO.CarResponseDTO;
 import reservationsystem.reservationcar.domain.Car;
 import reservationsystem.reservationcar.service.CarService;
-import reservationsystem.reservationcar.service.S3Service;  // S3 서비스 추가
-import org.springframework.beans.factory.annotation.Value;
 
 @Controller
 @RequiredArgsConstructor
 public class CarController {
 
     private final CarService carService;
-    private final S3Service s3Service;
 
     @GetMapping("/carManagement")
     public String carManagementPage(Model model) {
@@ -56,20 +30,11 @@ public class CarController {
     }
 
     @PostMapping("/car/new")
-    public String registerCar(@RequestParam("name") String name,
-                              @RequestParam("carNumber") String carNumber,
+    public String registerCar(@ModelAttribute CarRequestDTO carRequestDTO,
                               @RequestParam("image") MultipartFile file) {
         try {
             if (file != null && !file.isEmpty()) {
-                // S3에 파일 업로드
-                String fileUrl = s3Service.uploadFile(file, "car");  // "car" 디렉토리로 업로드
-
-                // 차량 정보 저장
-                Car car = new Car();
-                car.setName(name);
-                car.setCarNumber(carNumber);
-                car.setCarImageUrl(fileUrl);  // S3 파일 URL 저장
-                carService.join(car); // 차량 정보를 DB에 저장
+                carService.registerCar(carRequestDTO, file); // 서비스 레이어에 차량 등록 로직 위임
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -79,10 +44,11 @@ public class CarController {
 
     @GetMapping("/car/getCarList")
     @ResponseBody
+    // 불필요한 정보는 배제한다.
     public List<CarResponseDTO> getCarList() {
-        List<Car> cars = carService.findCars(); // 모든 차량을 조회하는 서비스 메서드
+        List<Car> cars = carService.findAllCars();
         return cars.stream()
-                .map(car -> new CarResponseDTO(car.getId(), car.getName(), car.getCarImageUrl()))
+                .map(car -> new CarResponseDTO(car.getId(), car.getCarName(), car.getCarImageUrl()))
                 .collect(Collectors.toList());
     }
 }

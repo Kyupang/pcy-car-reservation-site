@@ -2,26 +2,24 @@ package reservationsystem.reservationcar.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity
-@Getter @Setter
+@Data
 public class Car {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "car_id")
     private Long id;
 
-    private String name;
+    private String carName;
 
     private String carNumber;
 
@@ -29,4 +27,5 @@ public class Car {
 
     @OneToMany(mappedBy = "car")
     private List<Reservation> reservations = new ArrayList<>();
+
 }

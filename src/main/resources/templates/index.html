@@ -39,9 +39,7 @@
 
 <div class="car-selection">
     <label for="car-select">차량 목록</label>
-    <select id="car-select">
-        <!-- 차량 목록이 여기에 동적으로 추가됩니다. -->
-    </select>
+    <select id="car-select"></select>
 </div>
 
 <div class="button">
@@ -69,14 +67,14 @@
                     data.forEach(car => {
                         const option = document.createElement('option');
                         option.value = car.id;
-                        option.textContent = car.name;
-                        option.dataset.image = car.imageUrl; // 이미지 URL을 data 속성에 저장
+                        option.textContent = car.carName;
+                        option.dataset.image = car.carImageUrl;
                         carSelect.appendChild(option);
                     });
 
                     // 기본적으로 첫 번째 차량의 이미지를 표시
-                    if (data.length > 0 && data[0].imageUrl) {
-                        carImage.src = data[0].imageUrl;
+                    if (data.length > 0 && data[0].carImageUrl) {
+                        carImage.src = data[0].carImageUrl;
                     }
                 });
 

@@ -3,12 +3,9 @@ package reservationsystem.reservationcar.DTO;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ReservationRequestDTO {
 
     @NotEmpty(message = "이름 입력은 필수입니다")
@@ -32,4 +29,6 @@ public class ReservationRequestDTO {
     private LocalDateTime startTime;
     @NotNull
     private LocalDateTime endTime;
+
+    private Long carId;
 }

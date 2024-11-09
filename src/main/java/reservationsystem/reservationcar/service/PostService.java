@@ -1,16 +1,10 @@
 package reservationsystem.reservationcar.service;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,22 +22,17 @@ import reservationsystem.reservationcar.repository.PostRepository;
 public class PostService {
 
     private final PostRepository postRepository;
-
     private final ImageRepository imageRepository;
-
     private final S3Service s3Service;  // S3 서비스 추가
 
     @Transactional
-    public PostDTO savePost(PostDTO postDTO, List<MultipartFile> files, String boardType) throws IOException {
+    public void savePost(PostDTO postDTO, List<MultipartFile> files, String boardType) throws IOException {
         Post post = new Post();
         post.setTitle(postDTO.getTitle());
         post.setContent(postDTO.getContent());
         post.setAuthor(postDTO.getAuthor());
         post.setBoardType(boardType);
         post.setTimestamp(postDTO.getTimestamp());
-
-        // Save post
-        Post savedPost = postRepository.save(post);
 
         // Save images
         List<Image> images = new ArrayList<>();
@@ -57,34 +46,26 @@ public class PostService {
         }
 
         if (allFilesEmpty) {
-            savedPost.setImages(images);
-            postRepository.save(savedPost); // Save updated post with images
-
-            return convertToDTO(savedPost);
-        }
-
-        if (files != null && !files.isEmpty()) {
+            post.setImages(images);
+        } else {
             images = files.stream()
                     .map(file -> {
                         try {
                             // S3에 파일 저장
                             String url = s3Service.uploadFile(file, "post"); // "post" 폴더에 저장
                             Image image = new Image();
-                            image.setUrl(url);
-                            image.setPost(savedPost);
+                            image.setImageUrl(url);
+                            image.setPost(post);
                             return image;
                         } catch (IOException e) {
                             throw new RuntimeException("Failed to store image", e);
                         }
                     }).collect(Collectors.toList());
-            imageRepository.saveAll(images); // Save all images to the database
+            imageRepository.saveAll(images);
+            post.setImages(images);
         }
 
-        // Update the post with images
-        savedPost.setImages(images);
-        postRepository.save(savedPost); // Save updated post with images
-
-        return convertToDTO(savedPost);
+        postRepository.save(post);
     }
 
     public PostDTO getPost(Long id) {
@@ -107,7 +88,7 @@ public class PostService {
         postDTO.setAuthor(post.getAuthor());
         postDTO.setTimestamp(post.getTimestamp());
         postDTO.setImageUrls(post.getImages().stream()
-                .map(Image::getUrl)
+                .map(Image::getImageUrl)
                 .collect(Collectors.toList()));
         return postDTO;
     }
