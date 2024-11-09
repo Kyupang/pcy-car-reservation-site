@@ -1,6 +1,5 @@
 package reservationsystem.reservationcar.service;
 
-
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
 import net.nurigo.sdk.message.model.Balance;
@@ -26,7 +25,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SmsService {
-
     private final DefaultMessageService messageService;
 
     public SmsService() {

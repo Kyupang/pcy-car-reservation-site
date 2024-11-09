@@ -16,7 +16,6 @@ import reservationsystem.reservationcar.service.WarningImageService;
 @Controller
 @RequiredArgsConstructor
 public class WarningImageController {
-
     private final WarningImageService warningImageService;
     private final S3Service s3Service;  // S3 서비스 주입
 

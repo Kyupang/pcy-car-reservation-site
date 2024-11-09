@@ -19,39 +19,27 @@ import lombok.Data;
 @Entity
 @Data
 public class Reservation {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservation_id")
     private Long id;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "car_id")
     private Car car;
-
     private String name;
-
     private String phoneNumber;
-
     private String driver;
-
     private String affiliation;
-
     private String purpose;
-
     private String numberOfPassengers;
-
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;
-
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
-
     @Enumerated(EnumType.STRING)
     private ReservationStatus reservationStatus;
-
     private LocalDateTime reservationTime;
 
     // 차량정보에서 예약된 내용을 조회하기 위함
@@ -75,5 +63,4 @@ public class Reservation {
 
         this.setReservationStatus(ReservationStatus.APPROVED);
     }
-
 }

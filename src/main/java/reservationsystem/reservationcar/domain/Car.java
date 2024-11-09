@@ -13,19 +13,13 @@ import lombok.Data;
 @Entity
 @Data
 public class Car {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "car_id")
     private Long id;
-
     private String carName;
-
     private String carNumber;
-
     private String carImageUrl;
-
     @OneToMany(mappedBy = "car")
     private List<Reservation> reservations = new ArrayList<>();
-
 }

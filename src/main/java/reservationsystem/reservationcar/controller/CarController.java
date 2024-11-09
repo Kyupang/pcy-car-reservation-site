@@ -13,15 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import reservationsystem.reservationcar.DTO.CarRequestDTO;
-import reservationsystem.reservationcar.DTO.CarResponseDTO;
+import reservationsystem.reservationcar.dto.CarRequestDTO;
+import reservationsystem.reservationcar.dto.CarResponseDTO;
 import reservationsystem.reservationcar.domain.Car;
 import reservationsystem.reservationcar.service.CarService;
 
 @Controller
 @RequiredArgsConstructor
 public class CarController {
-
     private final CarService carService;
 
     @GetMapping("/carManagement")

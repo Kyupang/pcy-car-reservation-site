@@ -11,16 +11,12 @@ import lombok.Data;
 @Entity
 @Data
 public class Image {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String imageUrl;
-
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
-    
 }
 

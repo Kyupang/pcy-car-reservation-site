@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import reservationsystem.reservationcar.DTO.CarRequestDTO;
+import reservationsystem.reservationcar.dto.CarRequestDTO;
 import reservationsystem.reservationcar.domain.Car;
 import reservationsystem.reservationcar.repository.CarRepository;
 
@@ -14,7 +14,6 @@ import reservationsystem.reservationcar.repository.CarRepository;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CarService {
-
     private final CarRepository carRepository;
     private final S3Service s3Service;
 

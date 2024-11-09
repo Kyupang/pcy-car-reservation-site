@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import reservationsystem.reservationcar.DTO.PostDTO;
+import reservationsystem.reservationcar.dto.PostDTO;
 import reservationsystem.reservationcar.domain.Image;
 import reservationsystem.reservationcar.domain.Post;
 import reservationsystem.reservationcar.repository.ImageRepository;
@@ -21,7 +21,6 @@ import reservationsystem.reservationcar.repository.PostRepository;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class PostService {
-
     private final PostRepository postRepository;
     private final ImageRepository imageRepository;
     private final S3Service s3Service;  // S3 서비스 추가

@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import reservationsystem.reservationcar.DTO.ReservationRequestDTO;
-import reservationsystem.reservationcar.DTO.ReservationResponseDTO;
+import reservationsystem.reservationcar.dto.ReservationRequestDTO;
+import reservationsystem.reservationcar.dto.ReservationResponseDTO;
 import reservationsystem.reservationcar.domain.Reservation;
 import reservationsystem.reservationcar.repository.ReservationRepository;
 import reservationsystem.reservationcar.service.ReservationService;
@@ -34,7 +34,6 @@ import reservationsystem.reservationcar.service.SmsService;
 @RequiredArgsConstructor
 @Slf4j
 public class ReservationController {
-
     private final ReservationService reservationService;
     private final ReservationRepository reservationRepository;
     private final SmsService smsService;
@@ -130,7 +129,6 @@ public class ReservationController {
                 .collect(Collectors.toList());
     }
 
-
     // 캘린더 페이지
     @GetMapping("/reservation/calendar")
     public String calendar() {
@@ -166,7 +164,6 @@ public class ReservationController {
 
         return "reservation/reservationList";
     }
-
 
     // 예약 확정 목록 페이지
     @GetMapping("/reservation/management")

@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import reservationsystem.reservationcar.DTO.PostDTO;
+import reservationsystem.reservationcar.dto.PostDTO;
 import reservationsystem.reservationcar.service.PostService;
 
 @Controller
 @RequiredArgsConstructor
 public class PostController {
-
     private final PostService postService;
 
     // 게시글 목록을 보여주는 페이지
@@ -61,6 +60,7 @@ public class PostController {
             return "redirect:/error/404"; // 예를 들어, 404 오류 페이지로 리다이렉트
         }
     }
+
     // 게시글 작성 로직
     @PostMapping("/post/new/{boardType}")
     public String createPost(@PathVariable String boardType,

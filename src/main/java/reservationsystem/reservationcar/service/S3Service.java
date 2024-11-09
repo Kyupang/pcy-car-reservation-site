@@ -11,7 +11,6 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class S3Service {
-
     private final AmazonS3 amazonS3Client;
     private static final String BUCKET_NAME = "pych-car-reservation-bucket";
 

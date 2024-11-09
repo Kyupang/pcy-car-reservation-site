@@ -14,21 +14,14 @@ import lombok.Data;
 @Entity
 @Data
 public class Post {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
-
     private String content;
-
     private String author;
-
     private String boardType;
-
     private LocalDateTime timestamp;
-
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Image> images = new ArrayList<>();
 }

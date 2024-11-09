@@ -15,7 +15,6 @@ import reservationsystem.reservationcar.domain.ReservationStatus;
 @Repository
 @RequiredArgsConstructor
 public class ReservationRepository {
-
     private final EntityManager em;
 
     public void save(Reservation reservation) {
@@ -25,7 +24,6 @@ public class ReservationRepository {
     public Reservation findOne(Long id) {
         return em.find(Reservation.class, id);
     }
-
 
     public List<Reservation> findByCarId(Long carId) {
         return em.createQuery(

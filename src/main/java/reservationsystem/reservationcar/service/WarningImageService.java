@@ -10,7 +10,6 @@ import reservationsystem.reservationcar.repository.WarningImageRepository;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class WarningImageService {
-
     private final WarningImageRepository warningImageRepository;
 
     // WarningImage 저장 서비스 메서드

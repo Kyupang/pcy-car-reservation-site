@@ -1,4 +1,4 @@
-package reservationsystem.reservationcar.DTO;
+package reservationsystem.reservationcar.dto;
 
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
