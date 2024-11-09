@@ -1,5 +1,6 @@
 package reservationsystem.reservationcar.controller;
 
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,7 +31,7 @@ public class CarController {
     }
 
     @PostMapping("/car/new")
-    public String registerCar(@ModelAttribute CarRequestDTO carRequestDTO,
+    public String registerCar(@ModelAttribute @Valid CarRequestDTO carRequestDTO,
                               @RequestParam("image") MultipartFile file) {
         try {
             if (file != null && !file.isEmpty()) {

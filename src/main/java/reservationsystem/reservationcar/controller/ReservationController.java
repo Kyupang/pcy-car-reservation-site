@@ -108,7 +108,7 @@ public class ReservationController {
     }
 
     @PostMapping("/reservation/complete") // 예약 확인페이지에서 확인을 누르면 예약 확정
-    // @ModelAttribute 를통해 프론트 데이터 바인딩
+    // @ModelAttribute 를통해 프론트 폼 데이터 바인딩
     public String completeReservation(@ModelAttribute ReservationRequestDTO requestDTO,
                                       @RequestParam("carId") Long carId) {
         reservationService.createReservation(carId, requestDTO);
