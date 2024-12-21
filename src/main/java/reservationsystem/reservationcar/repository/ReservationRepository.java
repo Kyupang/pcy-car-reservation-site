@@ -27,7 +27,7 @@ public class ReservationRepository {
 
     public List<Reservation> findByCarId(Long carId) {
         return em.createQuery(
-                        "select r from Reservation r where r.car.id = :carId and r.reservationStatus != :status",
+                        "select r from Reservation r where r.car.id = :carId and r.reservationStatus != :status order by r.id desc",
                         Reservation.class)
                 .setParameter("carId", carId)
                 .setParameter("status", ReservationStatus.CANCEL)
@@ -37,7 +37,7 @@ public class ReservationRepository {
     // 예약 캘린더를 위한 find
     public List<Reservation> findAll() {
         return em.createQuery(
-                        "select r from Reservation r where r.reservationStatus != :status",
+                        "select r from Reservation r where r.reservationStatus != :status order by r.id desc",
                         Reservation.class)
                 .setParameter("status", ReservationStatus.CANCEL)
                 .getResultList();
@@ -45,7 +45,7 @@ public class ReservationRepository {
 
     // 예약 목록을 위한 find
     public Page<Reservation> findAll(Pageable pageable) {
-        String jpql = "SELECT r FROM Reservation r";
+        String jpql = "SELECT r FROM Reservation r order by r.id desc";
         TypedQuery<Reservation> query = em.createQuery(jpql, Reservation.class);
 
         int pageNumber = pageable.getPageNumber();

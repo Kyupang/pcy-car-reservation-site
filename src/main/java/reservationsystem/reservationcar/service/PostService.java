@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -73,13 +74,11 @@ public class PostService {
                 .map(this::convertToDTO)
                 .orElse(null);
     }
-
     public Page<PostDTO> getAllPosts(String boardType, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
         Page<Post> postPage = postRepository.findByBoardType(boardType, pageable);
         return postPage.map(this::convertToDTO);
     }
-
     private PostDTO convertToDTO(Post post) {
         PostDTO postDTO = new PostDTO();
         postDTO.setId(post.getId());
