@@ -27,7 +27,7 @@ public class ReservationRepository {
 
     public List<Reservation> findByCarId(Long carId) {
         return em.createQuery(
-                        "select r from Reservation r where r.car.id = :carId and r.reservationStatus != :status order by r.id desc",
+                        "select r from Reservation r where r.car.id = :carId and r.reservationStatus != :status",
                         Reservation.class)
                 .setParameter("carId", carId)
                 .setParameter("status", ReservationStatus.CANCEL)
