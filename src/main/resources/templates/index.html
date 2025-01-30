@@ -68,6 +68,7 @@
                         const option = document.createElement('option');
                         option.value = car.id;
                         option.textContent = car.carName;
+                        <!-- 옵션 객체에 데이터 image를 저장하는 방법 -->
                         option.dataset.image = car.carImageUrl;
                         carSelect.appendChild(option);
                     });

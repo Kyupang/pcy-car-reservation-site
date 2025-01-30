@@ -55,7 +55,7 @@ public class PostService {
                             // S3에 파일 저장
                             String url = s3Service.uploadFile(file, "post"); // "post" 폴더에 저장
                             Image image = new Image();
-                            image.setImageUrl(url);
+                            image.setUrl(url);
                             image.setPost(post);
                             return image;
                         } catch (IOException e) {
@@ -87,7 +87,7 @@ public class PostService {
         postDTO.setAuthor(post.getAuthor());
         postDTO.setTimestamp(post.getTimestamp());
         postDTO.setImageUrls(post.getImages().stream()
-                .map(Image::getImageUrl)
+                .map(Image::getUrl)
                 .collect(Collectors.toList()));
         return postDTO;
     }
