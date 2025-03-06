@@ -61,6 +61,7 @@
             const carImage = document.getElementById('car-image');
             const reserveButton = document.getElementById('reserve-button');
 
+
             fetch('/car/getCarList')
                 .then(response => response.json())
                 .then(data => {
@@ -97,6 +98,7 @@
                 const selectedCarId = carSelect.value;
                 window.location.href = `/reservation/new?carId=${selectedCarId}`;
             });
+
         });
     </script>
 </body>

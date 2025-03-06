@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 public class ReservationRequestDTO {
@@ -19,8 +20,10 @@ public class ReservationRequestDTO {
     @NotEmpty(message = "탑승인원 입력은 필수입니다")
     private String numberOfPassengers;
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime startTime;
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime endTime;
     private Long carId;
 }

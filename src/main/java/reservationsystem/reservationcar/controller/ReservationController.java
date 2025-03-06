@@ -38,6 +38,7 @@ public class ReservationController {
     private final ReservationRepository reservationRepository;
     private final SmsService smsService;
 
+
     @GetMapping("/reservation/new") // 예약 시스템
     public String createForm(Model model, @RequestParam(value = "carId", required = false) Long carId) {
         model.addAttribute("carId", carId);

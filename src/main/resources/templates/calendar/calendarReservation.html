@@ -53,6 +53,18 @@
             color: #FFFFFF !important; /* 흰색 글자 */
         }
 
+        .fc-event-car-c {
+            background-color: #1E3A8A !important; /* 진한 블루 */
+            border-color: #1E3A8A !important; /* 동일한 색 테두리 */
+            color: #FFFFFF !important; /* 흰색 글자 */
+        }
+
+        .fc-event-car-d {
+            background-color: #006400 !important; /* 진한 그린 */
+            border-color: #006400 !important; /* 동일한 색 테두리 */
+            color: #FFFFFF !important; /* 흰색 글자 */
+        }
+
         /* 소형 화면 (모바일) */
         @media (max-width: 768px) {
 
@@ -105,8 +117,14 @@
     <span class="legend-item" style="background-color: #585858; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-right: 5px;">
         스타리아 284다 8173
     </span>
-    <span class="legend-item" style="background-color: #A9A9A9; color: #FFFFFF; padding: 5px; border-radius: 3px;">
+    <span class="legend-item" style="background-color: #A9A9A9; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-right: 5px;">
         스타렉스
+    </span>
+    <span class="legend-item" style="background-color: #006400; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-right: 5px;">
+        45인승 버스
+    </span>
+    <span class="legend-item" style="background-color: #1E3A8A; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-right: 5px;">
+        25인승 버스
     </span>
 </div>
 <div id="calendar"></div> <!-- FullCalendar를 표시할 DIV -->
@@ -154,6 +172,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     return 'fc-event-car-a';
                 case '스타렉스':
                     return 'fc-event-car-b';
+                case '25인승 버스':
+                    return 'fc-event-car-c';
+                case '45인승 버스':
+                    return 'fc-event-car-d';
                 default:
                     return '';
             }
